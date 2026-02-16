@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, ChangeEvent, FormEvent } from "react";
+import ScaleIn from "../components/animations/ScaleIn";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -52,34 +53,34 @@ export default function ContactForm() {
   return (
     /* Main Page Background: Bone White (#E2E2E0) */
     <div className="min-h-screen bg-[#E2E2E0] flex items-center justify-center px-4 py-16 selection:bg-[#861211]/20">
-      <div className="w-full max-w-6xl bg-white rounded-[2.5rem] shadow-2xl shadow-[#0E2931]/20 overflow-hidden border border-[#0E2931]/5">
+      <ScaleIn className="w-full max-w-6xl bg-white rounded-[2.5rem] shadow-2xl shadow-[#0E2931]/20 overflow-hidden border border-[#0E2931]/5">
         <div className="grid md:grid-cols-2">
-          
+
           {/* 1st COLUMN: FULL LAYERED SIDEBAR */}
           <div className="relative bg-[#0E2931] text-[#E2E2E0] p-10 md:p-16 flex flex-col justify-center overflow-hidden min-h-[600px]">
-            
+
             {/* Background Layering - Using Absolute Divs for Full Coverage */}
             {/* Layer 1: Medium Teal Wave */}
-            <div 
-              className="absolute inset-0 z-0 bg-[#12484C]" 
+            <div
+              className="absolute inset-0 z-0 bg-[#12484C]"
               style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' }}
             />
-            
+
             {/* Layer 2: Lighter Teal/Aqua Shape */}
-            <div 
-              className="absolute inset-0 z-0 bg-[#2B7574]" 
+            <div
+              className="absolute inset-0 z-0 bg-[#2B7574]"
               style={{ clipPath: 'ellipse(90% 60% at 10% 40%)', opacity: 0.6 }}
             />
 
             {/* Layer 3: The Bone White "Sand" Line */}
-            <div 
-              className="absolute inset-0 z-0 bg-[#E2E2E0]" 
+            <div
+              className="absolute inset-0 z-0 bg-[#E2E2E0]"
               style={{ clipPath: 'polygon(100% 30%, 60% 50%, 80% 80%, 100% 90%)', opacity: 0.15 }}
             />
 
             {/* Layer 4: The Bold Red "Alone" Island Shape */}
-            <div 
-              className="absolute bottom-0 right-0 w-[80%] h-[70%] z-0 bg-[#861211]" 
+            <div
+              className="absolute bottom-0 right-0 w-[80%] h-[70%] z-0 bg-[#861211]"
               style={{ clipPath: 'polygon(100% 20%, 40% 60%, 50% 100%, 100% 100%)', opacity: 0.9 }}
             />
 
@@ -88,39 +89,39 @@ export default function ContactForm() {
 
             {/* CONTENT START (Wrapped in z-10 to stay above shapes) */}
             <div className="relative z-10">
-                <h2 className="text-5xl font-black mb-8 uppercase tracking-tighter leading-[0.9]">
-  Get in <br/> 
-  <span className="text-[#861211] drop-shadow-[3px_3px_3px_rgba(255,255,255,0.5)]">
-    Touch
-  </span>
-</h2>
-                
-                <p className="text-[#E2E2E0]/80 mb-12 text-lg leading-relaxed max-w-md font-medium">
-                  Have questions about our AI resilience network? Our team is ready to provide the clarity you need.
-                </p>
-                
-                <div className="space-y-8">
-                  <div className="flex items-center gap-5 group cursor-pointer">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-[#E2E2E0]/10 border border-[#E2E2E0]/20 group-hover:border-[#861211] transition-all duration-300 backdrop-blur-sm">
-                      <span className="text-xl">📧</span>
-                    </div>
-                    <span className="text-sm font-bold tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">support@uaarn.com</span>
-                  </div>
+              <h2 className="text-5xl font-black mb-8 uppercase tracking-tighter leading-[0.9]">
+                Get in <br />
+                <span className="text-[#861211] drop-shadow-[3px_3px_3px_rgba(255,255,255,0.5)]">
+                  Touch
+                </span>
+              </h2>
 
-                  <div className="flex items-center gap-5 group cursor-pointer">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-[#E2E2E0]/10 border border-[#E2E2E0]/20 group-hover:border-[#861211] transition-all duration-300 backdrop-blur-sm">
-                      <span className="text-xl">🌐</span>
-                    </div>
-                    <span className="text-sm font-bold tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">www.uaarn.com</span>
-                  </div>
+              <p className="text-[#E2E2E0]/80 mb-12 text-lg leading-relaxed max-w-md font-medium">
+                Have questions about our AI resilience network? Our team is ready to provide the clarity you need.
+              </p>
 
-                  <div className="flex items-center gap-5 group cursor-pointer">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-[#E2E2E0]/10 border border-[#E2E2E0]/20 group-hover:border-[#861211] transition-all duration-300 backdrop-blur-sm">
-                      <span className="text-xl">📍</span>
-                    </div>
-                    <span className="text-sm font-bold tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">Karachi, Pakistan</span>
+              <div className="space-y-8">
+                <div className="flex items-center gap-5 group cursor-pointer">
+                  <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-[#E2E2E0]/10 border border-[#E2E2E0]/20 group-hover:border-[#861211] transition-all duration-300 backdrop-blur-sm">
+                    <span className="text-xl">📧</span>
                   </div>
+                  <span className="text-sm font-bold tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">support@uaarn.com</span>
                 </div>
+
+                <div className="flex items-center gap-5 group cursor-pointer">
+                  <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-[#E2E2E0]/10 border border-[#E2E2E0]/20 group-hover:border-[#861211] transition-all duration-300 backdrop-blur-sm">
+                    <span className="text-xl">🌐</span>
+                  </div>
+                  <span className="text-sm font-bold tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">www.uaarn.com</span>
+                </div>
+
+                <div className="flex items-center gap-5 group cursor-pointer">
+                  <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-[#E2E2E0]/10 border border-[#E2E2E0]/20 group-hover:border-[#861211] transition-all duration-300 backdrop-blur-sm">
+                    <span className="text-xl">📍</span>
+                  </div>
+                  <span className="text-sm font-bold tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">Karachi, Pakistan</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -132,7 +133,7 @@ export default function ContactForm() {
               </h3>
               <div className="h-px w-full bg-[#0E2931]/10" />
             </div>
-            
+
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-1">
                 <input
@@ -169,7 +170,7 @@ export default function ContactForm() {
                   required
                 />
               </div>
-              
+
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -194,8 +195,8 @@ export default function ContactForm() {
             )}
           </div>
         </div>
-      </div>
-      
+      </ScaleIn>
+
       {/* Footer Branding */}
       <div className="absolute bottom-6 text-[9px] font-bold uppercase tracking-[0.5em] text-[#0E2931]/40">
         UAARN External Communications • Secure Channel
