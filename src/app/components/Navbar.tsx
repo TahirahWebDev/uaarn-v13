@@ -155,12 +155,38 @@ export default function Navbar() {
         {/* MOBILE NAVIGATION */}
         {open && (
           <div className="absolute top-full left-0 w-full bg-[#E2E2E0] border-t border-[#0E2931]/10 shadow-2xl flex flex-col items-center py-12 space-y-8 text-[#0E2931] lg:hidden animate-in fade-in slide-in-from-top-5 duration-300">
-            <Link href="/" className="text-lg font-black uppercase tracking-[0.2em] hover:text-[#861211]" onClick={() => setOpen(false)}>Home</Link>
-            <Link href="/about" className="text-lg font-black uppercase tracking-[0.2em] hover:text-[#861211]" onClick={() => setOpen(false)}>About</Link>
-            <Link href="/courses" className="text-lg font-black uppercase tracking-[0.2em] hover:text-[#861211]" onClick={() => setOpen(false)}>Courses</Link>
-            <Link href="/ask" className="text-lg font-black uppercase tracking-[0.2em] text-[#2B7574]" onClick={() => setOpen(false)}>Ask AI</Link>
-            <Link href="/contact" className="text-lg font-black uppercase tracking-[0.2em] hover:text-[#861211]" onClick={() => setOpen(false)}>Contact</Link>
-            <Link href="/role-selection" className="text-lg font-black uppercase tracking-[0.2em] hover:text-[#861211]" onClick={() => setOpen(false)}>Dashboard</Link>
+            {[
+              { name: "Home", path: "/" },
+              { name: "About", path: "/about" },
+              { name: "Courses", path: "/courses" },
+              { name: "Ask AI", path: "/ask" },
+              { name: "Contact", path: "/contact" },
+              { name: "Dashboard", path: "/role-selection" }
+            ].map((link) => {
+              const isHovered = hoveredPath === link.path;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.path}
+                  className="relative text-lg font-black uppercase tracking-[0.2em] px-2 py-1"
+                  onClick={() => setOpen(false)}
+                  onMouseEnter={() => setHoveredPath(link.path)}
+                  onMouseLeave={() => setHoveredPath(null)}
+                >
+                  <span className={`relative z-10 transition-colors duration-300 ${isHovered ? "text-[#861211]" : "text-[#0E2931]"}`}>
+                    {link.name}
+                  </span>
+                  {/* Mobile Center-Out Underline */}
+                  <motion.div
+                    className="absolute left-0 right-0 bottom-0 h-[2px] bg-[#861211]"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: isHovered ? 1 : 0 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    style={{ originX: 0.5 }}
+                  />
+                </Link>
+              );
+            })}
 
             <div className="pt-6 flex flex-col items-center gap-6 w-full px-10">
               <div className="w-full h-px bg-[#0E2931]/10" />
