@@ -47,7 +47,7 @@ function Marquee({ text, reverse = false }: { text: string; reverse?: boolean })
         animate={{ x: reverse ? ["0%", "50%"] : ["0%", "-50%"] }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
       >
-        <span className="text-[7vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-white/[0.07]">
+        <span className="text-[7vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-white/[0.10]">
           {repeated}
         </span>
       </motion.div>
@@ -102,7 +102,7 @@ export default function Footer() {
               initial={{ opacity: 0, scale: 0.85 }}
               animate={badgeInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-black uppercase tracking-tighter text-white/[0.04] leading-none whitespace-nowrap w-full text-center"
+              className="font-black uppercase tracking-tighter text-white/[0.08] leading-none whitespace-nowrap w-full text-center"
               style={{ fontSize: "clamp(4rem, 22vw, 22rem)" }}
             >
               UAARN
