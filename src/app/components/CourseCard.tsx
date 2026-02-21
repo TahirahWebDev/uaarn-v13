@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 interface SanityImage {
-  asset?: {
-    _ref?: string;
-  };
+  asset?: { _ref?: string };
 }
 
 interface CourseCardProps {
@@ -21,15 +21,18 @@ export default function CourseCard({ title, platform, image }: CourseCardProps) 
   if (typeof image === "string") {
     imageUrl = image;
   } else if (image?.asset?._ref) {
-    const projectId = "f3hh12vm"; 
+    const projectId = "f3hh12vm";
     const ref = image.asset._ref.replace("image-", "").replace("-jpg", ".jpg");
     imageUrl = `https://cdn.sanity.io/images/${projectId}/production/${ref}`;
   }
 
   return (
-    <div className="group relative bg-white border border-[#0E2931]/5 rounded-[2.5rem] transition-all duration-500 hover:shadow-2xl hover:shadow-[#2B7574]/10 flex flex-col h-full overflow-hidden">
-      
-      {/* Image Section with Branded Overlay */}
+    <motion.div
+      whileHover={{ y: -10, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 280, damping: 18 }}
+      className="group relative bg-white border border-[#0E2931]/5 rounded-[2.5rem] flex flex-col h-full overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-[#2B7574]/10 transition-shadow duration-500"
+    >
+      {/* Image Section */}
       <div className="relative h-52 w-full overflow-hidden">
         <Image
           src={imageUrl}
@@ -38,14 +41,24 @@ export default function CourseCard({ title, platform, image }: CourseCardProps) 
           className="object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
           unoptimized
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0E2931]/40 to-transparent opacity-60" />
-        
-        {/* Platform Badge - Matrix Style */}
-        <div className="absolute top-6 left-6 px-4 py-1.5 bg-[#E2E2E0]/90 backdrop-blur-md border border-[#0E2931]/10 rounded-full shadow-sm">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0E2931]/60 via-[#0E2931]/10 to-transparent" />
+
+        {/* Shimmer overlay on hover */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
+          whileHover={{ translateX: "200%" }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+        />
+
+        {/* Platform Badge */}
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          className="absolute top-6 left-6 px-4 py-1.5 bg-[#E2E2E0]/90 backdrop-blur-md border border-[#0E2931]/10 rounded-full shadow-sm"
+        >
           <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#0E2931]">
             {platform}
           </span>
-        </div>
+        </motion.div>
       </div>
 
       {/* Content Section */}
@@ -60,19 +73,28 @@ export default function CourseCard({ title, platform, image }: CourseCardProps) 
         <div className="mt-auto pt-6 flex items-center justify-between border-t border-[#0E2931]/5">
           <Link
             href={`/courses/${encodeURIComponent(title.toLowerCase().replace(/\s+/g, "-"))}`}
-            className="flex items-center gap-3 text-[#861211] font-black text-xs uppercase tracking-[0.2em] group/link"
+            className="flex items-center gap-2 text-[#861211] font-black text-xs uppercase tracking-[0.2em] group/link"
           >
-            Module Details 
-            <span className="transition-transform duration-300 group-hover/link:translate-x-2">→</span>
+            Module Details
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowRight size={14} />
+            </motion.span>
           </Link>
 
-          {/* Status Indicator matching Features Section */}
+          {/* Pulsing status dot */}
           <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#2B7574]/40 group-hover:bg-[#861211] animate-pulse" />
+            <motion.div
+              className="w-1.5 h-1.5 rounded-full bg-[#2B7574]/40 group-hover:bg-[#861211]"
+              animate={{ scale: [1, 1.5, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
             <span className="text-[9px] font-bold uppercase tracking-widest text-[#0E2931]/30">Active</span>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

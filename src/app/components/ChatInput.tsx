@@ -1,6 +1,7 @@
 "use client";
-import { FiSend, FiPaperclip } from 'react-icons/fi';
-import { useState } from 'react'; // Standard React hook
+import { FiSend, FiPaperclip } from "react-icons/fi";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ChatInputProps {
   onSend: (message: string) => Promise<void>;
@@ -9,56 +10,90 @@ interface ChatInputProps {
 }
 
 export default function ChatInput({ onSend, onFileUpload, disabled }: ChatInputProps) {
-  // FIXED: Changed useLocalState to useState
-  const [input, setInput] = useState(''); 
+  const [input, setInput] = useState("");
+  const [focused, setFocused] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || disabled) return;
     await onSend(input.trim());
-    setInput(''); // Clears input after successful transmission
-  }
+    setInput("");
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       onFileUpload(file);
-      e.target.value = ''; // Reset to allow re-uploading same file
+      e.target.value = "";
     }
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto flex gap-4 items-center">
-      {/* File Upload: Mid-Teal accent with Bone White background */}
-      <label className={`cursor-pointer p-3 rounded-xl bg-[#E2E2E0]/30 ${disabled ? 'opacity-30' : 'hover:bg-[#E2E2E0]/60 transition'}`}>
+    <motion.form
+      onSubmit={handleSubmit}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="max-w-4xl mx-auto flex gap-4 items-center"
+    >
+      {/* File Upload */}
+      <motion.label
+        whileHover={{ scale: 1.1, rotate: -10 }}
+        whileTap={{ scale: 0.95 }}
+        className={`cursor-pointer p-3 rounded-xl bg-[#E2E2E0]/30 ${disabled ? "opacity-30" : "hover:bg-[#E2E2E0]/60 transition"}`}
+      >
         <FiPaperclip className="w-5 h-5 text-[#0E2931]/40" />
-        <input 
-          type="file" 
-          className="hidden" 
-          disabled={disabled} 
-          onChange={handleFileChange} 
+        <input
+          type="file"
+          className="hidden"
+          disabled={disabled}
+          onChange={handleFileChange}
           accept=".pdf,.doc,.docx,.txt"
         />
-      </label>
+      </motion.label>
 
-      {/* Main Input: Bone White theme with Deep Teal text */}
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Query the Resilience Network..."
-        className="flex-1 px-6 py-4 bg-[#E2E2E0]/20 border border-[#0E2931]/5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#861211]/20 focus:bg-white text-[#0E2931] font-medium transition-all"
-        disabled={disabled}
-      />
+      {/* Input Field */}
+      <div className="flex-1 relative">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          placeholder="Query the Resilience Network..."
+          className="w-full px-6 py-4 bg-[#E2E2E0]/20 border border-[#0E2931]/5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#861211]/20 focus:bg-white text-[#0E2931] font-medium transition-all"
+          disabled={disabled}
+        />
+        {/* Animated focus ring glow */}
+        <AnimatePresence>
+          {focused && (
+            <motion.div
+              className="absolute inset-0 rounded-full border-2 border-[#861211]/30 pointer-events-none"
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.2 }}
+            />
+          )}
+        </AnimatePresence>
+      </div>
 
-      {/* Send Button: Crimson accent matching UAARN palette */}
-      <button
+      {/* Send Button */}
+      <motion.button
         type="submit"
         disabled={disabled || !input.trim()}
-        className="p-4 bg-[#861211] text-white rounded-full hover:bg-[#6a0e0d] disabled:opacity-30 transition-all shadow-xl shadow-[#861211]/20 active:scale-95"
+        whileHover={{ scale: 1.1, rotate: -8 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 400, damping: 15 }}
+        className="p-4 bg-[#861211] text-white rounded-full hover:bg-[#6a0e0d] disabled:opacity-30 transition-colors shadow-xl shadow-[#861211]/20"
       >
-        <FiSend size={20} />
-      </button>
-    </form>
+        <motion.div
+          animate={input.trim() && !disabled ? { x: [0, 3, 0] } : {}}
+          transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <FiSend size={20} />
+        </motion.div>
+      </motion.button>
+    </motion.form>
   );
 }
