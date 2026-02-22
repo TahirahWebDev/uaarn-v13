@@ -103,7 +103,7 @@ export default function ContactForm() {
               </SlideIn>
 
               <div className="space-y-6">
-                {contactInfo.map(({ label, emoji }, i) => (
+                {contactInfo.map(({ icon: Icon, label }, i) => (
                   <motion.div
                     key={label}
                     initial={{ opacity: 0, x: -20 }}
@@ -116,7 +116,7 @@ export default function ContactForm() {
                       transition={{ type: "spring", stiffness: 400 }}
                       className="w-12 h-12 flex items-center justify-center rounded-2xl bg-[#E2E2E0]/10 border border-[#E2E2E0]/20 group-hover:border-[#861211] transition-all duration-300 backdrop-blur-sm"
                     >
-                      <span className="text-xl">{emoji}</span>
+                      <Icon size={20} className="text-[#E2E2E0]/80 group-hover:text-[#861211] transition-colors duration-300" />
                     </motion.div>
                     <motion.span
                       whileHover={{ x: 4 }}

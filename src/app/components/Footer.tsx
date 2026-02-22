@@ -113,7 +113,7 @@ export default function Footer() {
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
 
             {/* Brand */}
-            <div className="md:col-span-2 space-y-6">
+            <div className="md:col-span-2 space-y-6 md:pr-16">
               <motion.div whileHover={{ scale: 1.04 }} transition={{ type: "spring", stiffness: 300 }}>
                 <Link href="/" className="inline-block">
                   <div className="relative w-40 h-12">
@@ -195,39 +195,7 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* Connect */}
-            <div className="space-y-6">
-              <motion.h4
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="text-[#2B7574] font-black text-xs uppercase tracking-[0.25em]"
-              >
-                Connect
-              </motion.h4>
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="text-[10px] font-black uppercase tracking-[0.3em] text-[#E2E2E0]/30 leading-loose"
-              >
-                Based in Karachi, Sindh. <br />
-                Global Reach.
-              </motion.p>
-              <Link href="/contact">
-                <motion.div
-                  whileHover={{ scale: 1.04, y: -3 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#861211] text-white text-[10px] font-black uppercase tracking-widest shadow-xl shadow-[#861211]/20 hover:shadow-[#861211]/40 transition-shadow"
-                >
-                  <Zap size={12} />
-                  Get in Touch
-                </motion.div>
-              </Link>
-            </div>
+
           </div>
 
           {/* ── Bottom bar ───────────────────────────────────────── */}
