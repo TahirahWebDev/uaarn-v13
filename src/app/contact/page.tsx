@@ -4,6 +4,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SlideIn from "../components/animations/SlideIn";
 import FadeIn from "../components/animations/FadeIn";
+import TypewriterText from "../components/animations/TypewriterText";
 import { Mail, Globe, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 
 const contactInfo = [
@@ -92,7 +93,9 @@ export default function ContactForm() {
               <SlideIn direction="left">
                 <h2 className="text-5xl font-black mb-8 uppercase tracking-tighter leading-[0.9]">
                   Get in <br />
-                  <span className="text-[#861211] drop-shadow-[3px_3px_3px_rgba(255,255,255,0.5)]">Touch</span>
+                  <span className="text-[#861211] drop-shadow-[3px_3px_3px_rgba(255,255,255,0.5)]">
+                    <TypewriterText text="Touch" loop cursorColor="#861211" />
+                  </span>
                 </h2>
                 <p className="text-[#E2E2E0]/80 mb-12 text-lg leading-relaxed max-w-md font-medium">
                   Have questions about our AI resilience network? Our team is ready to provide the clarity you need.

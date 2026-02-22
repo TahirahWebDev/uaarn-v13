@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ScaleIn from "../components/animations/ScaleIn";
 import SlideIn from "../components/animations/SlideIn";
 import FadeIn from "../components/animations/FadeIn";
+import TypewriterText from "../components/animations/TypewriterText";
 
 export default function QuizPage() {
     type Quiz = { question: string; options: string[]; answer: string };
@@ -74,7 +75,7 @@ export default function QuizPage() {
                             >
                                 <Brain className="w-5 h-5" />
                             </motion.div>
-                            Neural Assessment
+                            <TypewriterText text="Neural Assessment" loop cursorColor="#0E2931" />
                         </h2>
                         <motion.span
                             className="text-[10px] font-black uppercase tracking-widest text-[#2B7574]"
@@ -122,8 +123,8 @@ export default function QuizPage() {
                                 className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                             >
                                 <div className={`max-w-[90%] rounded-[1.5rem] leading-relaxed shadow-sm ${msg.role === "user"
-                                        ? "bg-[#861211] text-white rounded-tr-sm px-6 py-4 shadow-lg shadow-[#861211]/20"
-                                        : "bg-white border border-[#0E2931]/5 text-[#0E2931] rounded-tl-sm p-6 md:p-8"
+                                    ? "bg-[#861211] text-white rounded-tr-sm px-6 py-4 shadow-lg shadow-[#861211]/20"
+                                    : "bg-white border border-[#0E2931]/5 text-[#0E2931] rounded-tl-sm p-6 md:p-8"
                                     }`}>
                                     {msg.role === "user" ? (
                                         <span className="font-bold uppercase tracking-widest text-xs">{msg.content}</span>
@@ -158,10 +159,10 @@ export default function QuizPage() {
                                                                         whileTap={!hasAnswered ? { scale: 0.98 } : {}}
                                                                         onClick={() => !hasAnswered && setSelected(prev => ({ ...prev, [key]: opt }))}
                                                                         className={`px-5 py-4 border-2 rounded-2xl cursor-pointer text-[#0E2931] text-sm font-medium transition-all duration-300 ${hasAnswered
-                                                                                ? isAnswer ? "border-[#2B7574] bg-[#2B7574]/10 text-[#2B7574] font-bold"
-                                                                                    : isSelected ? "border-[#861211] bg-[#861211]/10 text-[#861211]"
-                                                                                        : "border-[#E2E2E0] opacity-50"
-                                                                                : "border-[#E2E2E0] hover:border-[#2B7574] hover:bg-[#E2E2E0]/20"
+                                                                            ? isAnswer ? "border-[#2B7574] bg-[#2B7574]/10 text-[#2B7574] font-bold"
+                                                                                : isSelected ? "border-[#861211] bg-[#861211]/10 text-[#861211]"
+                                                                                    : "border-[#E2E2E0] opacity-50"
+                                                                            : "border-[#E2E2E0] hover:border-[#2B7574] hover:bg-[#E2E2E0]/20"
                                                                             }`}
                                                                     >
                                                                         {opt}

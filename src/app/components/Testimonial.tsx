@@ -6,6 +6,7 @@ import ScaleIn from "./animations/ScaleIn";
 import StaggerContainer from "./animations/StaggerContainer";
 import FadeIn from "./animations/FadeIn";
 import { motion } from "framer-motion";
+import TypewriterText from "./animations/TypewriterText";
 
 export default function TestimonialsSection() {
   const testimonials = [
@@ -79,13 +80,9 @@ export default function TestimonialsSection() {
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-black text-[#0E2931] tracking-tighter uppercase leading-none">
             Trusted by{" "}
-            <motion.span
-              className="text-[#861211] italic inline-block"
-              animate={{ y: [0, -4, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              Industry Leaders
-            </motion.span>
+            <span className="text-[#861211] italic inline-block">
+              <TypewriterText text="Industry Leaders" loop cursorColor="#861211" />
+            </span>
           </h2>
         </SlideIn>
 
@@ -118,8 +115,8 @@ export default function TestimonialsSection() {
                           <Star
                             size={12}
                             className={`transition-colors duration-300 ${i < item.rating
-                                ? "fill-[#FACC15] text-[#FACC15]"
-                                : "fill-[#2B7574]/20 text-[#2B7574]/20"
+                              ? "fill-[#FACC15] text-[#FACC15]"
+                              : "fill-[#2B7574]/20 text-[#2B7574]/20"
                               }`}
                           />
                         </motion.div>

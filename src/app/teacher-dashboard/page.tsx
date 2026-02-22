@@ -8,6 +8,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import FadeIn from "../components/animations/FadeIn";
 import SlideIn from "../components/animations/SlideIn";
+import TypewriterText from "../components/animations/TypewriterText";
 
 export default function TeacherDashboard() {
   const { isLoaded, user } = useUser();
@@ -79,13 +80,9 @@ export default function TeacherDashboard() {
 
                 <h1 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
                   Welcome, <br />
-                  <motion.span
-                    className="text-white drop-shadow-[2px_2px_2px_rgba(134,18,17,0.8)] inline-block"
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    {user.firstName}
-                  </motion.span>
+                  <span className="text-white drop-shadow-[2px_2px_2px_rgba(134,18,17,0.8)] inline-block">
+                    <TypewriterText text={user.firstName || "Architect"} loop={false} cursor={false} />
+                  </span>
                 </h1>
 
                 <p className="text-[#E2E2E0]/80 text-lg font-medium italic leading-relaxed max-w-xs mb-12">

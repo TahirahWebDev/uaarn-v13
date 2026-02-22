@@ -7,6 +7,7 @@ import { useRef } from "react";
 import SlideIn from "../components/animations/SlideIn";
 import ScaleIn from "../components/animations/ScaleIn";
 import FloatingElement from "../components/animations/FloatingElement";
+import TypewriterText from "../components/animations/TypewriterText";
 
 const pillars = [
   { icon: Target, title: "Precision", desc: "Laser-focused explanations that cut through academic complexity.", color: "#861211" },
@@ -102,15 +103,9 @@ export default function AboutPage() {
         <SlideIn direction="up" delay={0.1}>
           <h2 className="text-6xl md:text-7xl font-black text-[#0E2931] tracking-tighter uppercase leading-[0.85]">
             About{" "}
-            <Link href="/">
-              <motion.span
-                className="bg-gradient-to-r from-[#2B7574] via-[#861211] to-[#12484C] bg-clip-text text-transparent italic pr-3 inline-block"
-                animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              >
-                UAARN
-              </motion.span>
-            </Link>
+            <span className="bg-gradient-to-r from-[#2B7574] via-[#861211] to-[#12484C] bg-clip-text text-transparent italic pr-3 inline-block">
+              <TypewriterText text="UAARN" loop cursorColor="#861211" />
+            </span>
           </h2>
         </SlideIn>
 
@@ -249,13 +244,9 @@ export default function AboutPage() {
           </div>
           <h2 className="text-5xl font-black text-[#0E2931] mb-20 uppercase tracking-tighter">
             Meet Our{" "}
-            <motion.span
-              className="text-[#861211] inline-block"
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              Core Team
-            </motion.span>
+            <span className="text-[#861211] inline-block">
+              <TypewriterText text="Core Team" loop cursorColor="#861211" />
+            </span>
           </h2>
         </SlideIn>
 

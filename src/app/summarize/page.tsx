@@ -6,6 +6,7 @@ import { Youtube, FileUp, FileText, Volume2, Square, Sparkles, Brain, RotateCcw,
 import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "../components/animations/FadeIn";
 import SlideIn from "../components/animations/SlideIn";
+import TypewriterText from "../components/animations/TypewriterText";
 
 type SummarizePayload = { source: "youtube"; link: string } | { source: "text"; text: string };
 
@@ -136,7 +137,7 @@ function SummarizeContent() {
         <div className="text-center mb-12">
           <SlideIn direction="down">
             <h1 className="text-4xl md:text-5xl font-black text-[#0E2931] mb-6 uppercase tracking-tighter leading-none">
-              Summarize <span className="text-[#861211]">Intelligence</span>
+              Summarize <span className="text-[#861211]"><TypewriterText text="Intelligence" loop cursorColor="#861211" /></span>
             </h1>
           </SlideIn>
           <FadeIn delay={0.2}>
@@ -158,8 +159,8 @@ function SummarizeContent() {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               className={`px-6 py-3 rounded-full border transition-all text-[10px] font-black uppercase tracking-widest flex items-center gap-2 ${source === key
-                  ? "bg-[#0E2931] text-white border-[#0E2931] shadow-xl scale-105"
-                  : "bg-white text-[#0E2931]/40 border-[#0E2931]/5 hover:bg-[#E2E2E0]/50 hover:text-[#0E2931]"
+                ? "bg-[#0E2931] text-white border-[#0E2931] shadow-xl scale-105"
+                : "bg-white text-[#0E2931]/40 border-[#0E2931]/5 hover:bg-[#E2E2E0]/50 hover:text-[#0E2931]"
                 }`}
             >
               <motion.div animate={source === key ? { rotate: [0, 10, -10, 0] } : {}} transition={{ duration: 0.4 }}>

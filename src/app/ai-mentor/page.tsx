@@ -6,6 +6,7 @@ import LoadingDots from "../components/LoadingDots";
 import CareerSection from "../components/CareerSection";
 import { motion, AnimatePresence } from "framer-motion";
 import { BrainCircuit, Sparkles, Zap, MessageCircle } from "lucide-react";
+import TypewriterText from "../components/animations/TypewriterText";
 
 interface Message {
   text: string;
@@ -111,7 +112,9 @@ export default function AIMentor() {
               <BrainCircuit className="w-5 h-5" />
             </motion.div>
             <div>
-              <h2 className="text-lg font-black text-[#0E2931] uppercase tracking-tighter">AI Career Mentor</h2>
+              <h2 className="text-lg font-black text-[#0E2931] uppercase tracking-tighter">
+                <TypewriterText text="AI Career Mentor" loop cursorColor="#0E2931" />
+              </h2>
               <p className="text-[10px] font-bold text-[#2B7574] uppercase tracking-widest">Neural Career Intelligence</p>
             </div>
           </div>

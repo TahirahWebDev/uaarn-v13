@@ -8,6 +8,7 @@ import { BookOpen, Sparkles, Zap } from "lucide-react";
 import SlideIn from "../components/animations/SlideIn";
 import FadeIn from "../components/animations/FadeIn";
 import FloatingElement from "../components/animations/FloatingElement";
+import TypewriterText from "../components/animations/TypewriterText";
 
 interface Course {
   _id: string;
@@ -94,13 +95,9 @@ export default function CoursesPage() {
         <SlideIn direction="up" className="max-w-2xl">
           <h2 className="text-4xl md:text-6xl font-black text-[#0E2931] uppercase tracking-tighter mb-4">
             Explore{" "}
-            <motion.span
-              className="text-[#861211] inline-block"
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              Top Courses
-            </motion.span>
+            <span className="text-[#861211] inline-block">
+              <TypewriterText text="Top Courses" loop cursorColor="#861211" />
+            </span>
           </h2>
           <p className="text-[#0E2931]/60 mt-4 text-lg font-medium italic">
             Learn from world-class platforms like Coursera — and let AI summarize
@@ -137,8 +134,8 @@ export default function CoursesPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
                 className={`px-5 py-2 rounded-full border text-[10px] font-black uppercase tracking-widest transition-all duration-200 ${filter === p
-                    ? "bg-[#0E2931] text-white border-[#0E2931] shadow-xl"
-                    : "bg-white text-[#0E2931]/50 border-[#0E2931]/10 hover:bg-[#E2E2E0]/60 hover:text-[#0E2931]"
+                  ? "bg-[#0E2931] text-white border-[#0E2931] shadow-xl"
+                  : "bg-white text-[#0E2931]/50 border-[#0E2931]/10 hover:bg-[#E2E2E0]/60 hover:text-[#0E2931]"
                   }`}
               >
                 {p}

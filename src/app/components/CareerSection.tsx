@@ -5,6 +5,7 @@ import SlideIn from './animations/SlideIn'
 import ScaleIn from './animations/ScaleIn'
 import StaggerContainer from './animations/StaggerContainer'
 import { motion } from 'framer-motion'
+import TypewriterText from './animations/TypewriterText'
 
 const careerFeatures = [
     {
@@ -31,7 +32,7 @@ export default function CareerSection() {
 
                 <SlideIn direction="up">
                     <h2 className="text-3xl sm:text-4xl font-black text-[#0E2931] tracking-tighter uppercase leading-tight max-w-3xl mx-auto">
-                        Your <span className="text-[#861211]">AI-Powered</span> Career Mentor
+                        Your <span className="text-[#861211]"><TypewriterText text="AI-Powered" loop cursorColor="#861211" /></span> Career Mentor
                     </h2>
 
                     <p className="mt-4 text-lg text-[#0E2931]/70 max-w-3xl mx-auto font-medium">

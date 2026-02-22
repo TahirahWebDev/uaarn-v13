@@ -5,6 +5,7 @@ import { AlertCircle, Bot, Sparkles, Zap } from "lucide-react";
 import ChatBubble from "../components/ChatBubble";
 import ChatInput from "../components/ChatInput";
 import { motion, AnimatePresence } from "framer-motion";
+import TypewriterText from "../components/animations/TypewriterText";
 
 type Message = { role: "user" | "ai"; content: string };
 
@@ -75,7 +76,9 @@ export default function AskPage() {
                                 <Bot className="w-6 h-6" />
                             </motion.div>
                             <div>
-                                <h2 className="text-xl font-black text-[#0E2931] uppercase tracking-tighter">Ask UAARN</h2>
+                                <h2 className="text-xl font-black text-[#0E2931] uppercase tracking-tighter">
+                                    <TypewriterText text="Ask UAARN" loop cursorColor="#0E2931" />
+                                </h2>
                                 <p className="text-[10px] font-bold text-[#2B7574] uppercase tracking-widest">Neural Intelligence Path</p>
                             </div>
                         </div>

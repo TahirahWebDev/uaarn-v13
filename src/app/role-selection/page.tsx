@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import SlideIn from "../components/animations/SlideIn";
 import ScaleIn from "../components/animations/ScaleIn";
 import FloatingElement from "../components/animations/FloatingElement";
+import TypewriterText from "../components/animations/TypewriterText";
 
 export default function SelectRolePage() {
   const { isLoaded: isUserLoaded, user } = useUser();
@@ -88,13 +89,9 @@ export default function SelectRolePage() {
         </motion.div>
         <h1 className="text-4xl md:text-5xl font-black text-[#0E2931] tracking-tighter uppercase leading-[0.9]">
           Define Your{" "}
-          <motion.span
-            className="text-[#861211] italic inline-block pr-2"
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            Role
-          </motion.span>
+          <span className="text-[#861211] italic inline-block pr-2">
+            <TypewriterText text="Role" loop cursorColor="#861211" />
+          </span>
         </h1>
         <p className="text-[#0E2931]/60 text-lg font-medium italic">
           Select your operational path to initialize your personalized <br className="hidden md:block" />

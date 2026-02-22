@@ -12,6 +12,7 @@ import SlideIn from "./components/animations/SlideIn";
 import ScaleIn from "./components/animations/ScaleIn";
 import StaggerContainer from "./components/animations/StaggerContainer";
 import FloatingElement from "./components/animations/FloatingElement";
+import TypewriterText from "./components/animations/TypewriterText";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
@@ -32,7 +33,7 @@ export default function HomePage() {
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
-    const TSPEED = 10;   // ms/char typing
+    const TSPEED = 8;   // ms/char typing
     const DSPEED = 8;   // ms/char deleting
     const PAUSE = 1600; // ms pause after full text
 
@@ -237,11 +238,10 @@ export default function HomePage() {
             <div className="flex flex-col items-center text-center mb-20">
               <SlideIn direction="up" className="max-w-2xl">
                 <h3 className="text-4xl md:text-5xl font-black text-[#0E2931] mb-4 uppercase tracking-tighter">
-                  Engineered for <motion.span
-                    className="text-[#861211] inline-block"
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  >Excellence</motion.span>
+                  Engineered for{" "}
+                  <span className="text-[#861211] inline-block">
+                    <TypewriterText text="Excellence" loop cursorColor="#861211" />
+                  </span>
                 </h3>
                 <p className="text-[#0E2931]/60 text-lg font-medium italic">
                   Industry-leading features for high-performance learners.
