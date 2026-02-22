@@ -26,7 +26,7 @@ export default function AboutPage() {
   const missionInView = useInView(missionRef, { once: true });
 
   return (
-    <div className="bg-[#E2E2E0] text-[#0E2931] px-6 py-10 flex flex-col items-center w-full relative overflow-hidden selection:bg-[#861211]/20 font-sans">
+    <div className="bg-[#E2E2E0] text-[#0E2931] px-6 py-0 flex flex-col items-center w-full relative overflow-hidden selection:bg-[#861211]/20 font-sans">
 
       {/* Animated background blobs */}
       <motion.div
@@ -42,7 +42,7 @@ export default function AboutPage() {
 
 
       {/* ─── HERO HEADING ─── */}
-      <div className="max-w-4xl text-center space-y-10 pt-20 pb-24 w-full">
+      <div className="max-w-4xl text-center space-y-10 pt-4 pb-16 w-full">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: -15 }}

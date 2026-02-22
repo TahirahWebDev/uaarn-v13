@@ -202,27 +202,7 @@ export default function HomePage() {
             </motion.div>
           </FadeIn>
 
-          {/* Floating inline stat pills */}
-          <FadeIn delay={1.4} className="mt-16 flex flex-wrap justify-center gap-4">
-            {[
-              { label: "Active Learners", value: "50+", color: "#2B7574" },
-              { label: "AI Interactions", value: "1K+", color: "#861211" },
-              { label: "Satisfaction", value: "98%", color: "#12484C" },
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.6 + i * 0.15, duration: 0.4 }}
-                whileHover={{ scale: 1.06 }}
-                className="px-5 py-2.5 bg-white rounded-2xl shadow-sm border border-[#0E2931]/5 flex items-center gap-3 cursor-default"
-              >
-                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: stat.color }} />
-                <span className="text-xs font-bold text-[#0E2931]/50 uppercase tracking-widest whitespace-nowrap">{stat.label}</span>
-                <span className="text-sm font-black" style={{ color: stat.color }}>{stat.value}</span>
-              </motion.div>
-            ))}
-          </FadeIn>
+
         </motion.div>
       </section>
 
