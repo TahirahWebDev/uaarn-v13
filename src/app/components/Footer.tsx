@@ -1,7 +1,8 @@
 "use client";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Twitter, Linkedin, Mail, ArrowUpRight, Zap } from "lucide-react";
+import { Linkedin, Mail, Instagram, Facebook, ArrowUpRight } from "lucide-react";
 import {
   motion,
   useScroll,
@@ -11,11 +12,22 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 
+/* ─── X (formerly Twitter) icon ────────────────────────────────── */
+function XIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 300 300" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
+    </svg>
+  );
+}
+
 /* ─── DATA ─────────────────────────────────────────────────────── */
 const socialLinks = [
-  { href: "https://linkedin.com/company/nexa-agent", icon: Linkedin, label: "LinkedIn", color: "#0A66C2" },
-  { href: "https://x.com/nexa_agent25", icon: Twitter, label: "Twitter/X", color: "#1DA1F2" },
-  { href: "mailto:support@uaarn.com", icon: Mail, label: "Email", color: "#861211" },
+  { href: "https://linkedin.com/company/nexa-agent", CustomIcon: null, icon: Linkedin, label: "LinkedIn", color: "#0A66C2" },
+  { href: "https://x.com/nexa_agent25", CustomIcon: XIcon, icon: null, label: "X", color: "#000000" },
+  { href: "https://instagram.com/uaarn", CustomIcon: null, icon: Instagram, label: "Instagram", color: "#E1306C" },
+  { href: "https://facebook.com/uaarn", CustomIcon: null, icon: Facebook, label: "Facebook", color: "#1877F2" },
+  { href: "mailto:support@uaarn.com", CustomIcon: null, icon: Mail, label: "Email", color: "#861211" },
 ];
 
 const footerLinks = {
@@ -129,26 +141,29 @@ export default function Footer() {
 
               {/* Social icons */}
               <div className="flex gap-4 pt-2">
-                {socialLinks.map(({ href, icon: Icon, label, color }, i) => (
-                  <motion.div
-                    key={href}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 + i * 0.08 }}
-                  >
-                    <Link href={href} target={href.startsWith("http") ? "_blank" : undefined} aria-label={label}>
-                      <motion.div
-                        className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#E2E2E0]/50 hover:text-white transition-colors cursor-pointer"
-                        whileHover={{ scale: 1.2, y: -4, backgroundColor: color, borderColor: color, color: "#ffffff" }}
-                        whileTap={{ scale: 0.9 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                      >
-                        <Icon size={18} />
-                      </motion.div>
-                    </Link>
-                  </motion.div>
-                ))}
+                {socialLinks.map(({ href, icon, CustomIcon, label, color }, i) => {
+                  const LIcon = icon as React.ElementType | null;
+                  return (
+                    <motion.div
+                      key={href}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 + i * 0.08 }}
+                    >
+                      <Link href={href} target={href.startsWith("http") ? "_blank" : undefined} aria-label={label}>
+                        <motion.div
+                          className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#E2E2E0]/50 hover:text-white transition-colors cursor-pointer"
+                          whileHover={{ scale: 1.2, y: -4, backgroundColor: color, borderColor: color, color: "#ffffff" }}
+                          whileTap={{ scale: 0.9 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                        >
+                          {CustomIcon ? <CustomIcon size={18} /> : LIcon ? <LIcon size={18} /> : null}
+                        </motion.div>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
 

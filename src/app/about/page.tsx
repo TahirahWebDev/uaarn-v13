@@ -1,11 +1,9 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
 import { Target, Lightbulb, Shield, Sparkles, Zap, Globe } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import SlideIn from "../components/animations/SlideIn";
-import FloatingElement from "../components/animations/FloatingElement";
 import TypewriterText from "../components/animations/TypewriterText";
 
 const pillars = [

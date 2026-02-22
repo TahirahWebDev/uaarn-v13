@@ -11,7 +11,6 @@ import FadeIn from "./components/animations/FadeIn";
 import SlideIn from "./components/animations/SlideIn";
 import ScaleIn from "./components/animations/ScaleIn";
 import StaggerContainer from "./components/animations/StaggerContainer";
-import FloatingElement from "./components/animations/FloatingElement";
 import TypewriterText from "./components/animations/TypewriterText";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -60,7 +59,6 @@ export default function HomePage() {
 
     timer = setTimeout(typeL1, 300);
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

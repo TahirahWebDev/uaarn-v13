@@ -38,7 +38,6 @@ export default function TypewriterText({
     cursorColor = "currentColor",
 }: TypewriterTextProps) {
     const [displayed, setDisplayed] = useState("");
-    const [typing, setTyping] = useState(true);   // true = typing, false = deleting
     const ref = useRef<HTMLSpanElement>(null);
     // For loop mode, start immediately on mount (no InView needed for hero usage).
     // For one-shot mode, trigger on scroll into view.
@@ -63,19 +62,16 @@ export default function TypewriterText({
                 if (loop) {
                     timer = setTimeout(deleteChar, pauseMs);
                 }
-                setTyping(false);
             }
         }
 
         function deleteChar() {
-            setTyping(false);
             i = Math.max(i - 1, 0);
             setDisplayed(text.slice(0, i));
             if (i > 0) {
                 timer = setTimeout(deleteChar, deleteSpeed);
             } else {
                 // fully deleted — restart
-                setTyping(true);
                 timer = setTimeout(typeChar, 300);
             }
         }

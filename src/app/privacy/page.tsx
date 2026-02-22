@@ -114,7 +114,7 @@ export default function PrivacyPage() {
 
                     <SlideIn direction="up" delay={0.2}>
                         <p className="text-[#E2E2E0]/60 text-lg md:text-xl font-medium italic max-w-2xl mx-auto mt-6">
-                            Your data belongs to you. Here's exactly how UAARN collects, uses, and protects it.
+                            Your data belongs to you. Here&apos;s exactly how UAARN collects, uses, and protects it.
                         </p>
                     </SlideIn>
 
@@ -219,7 +219,7 @@ export default function PrivacyPage() {
                             Questions About Your Data?
                         </h3>
                         <p className="text-[#E2E2E0]/50 text-base mb-8 font-medium italic">
-                            Reach out to our team and we'll respond within 48 hours.
+                            Reach out to our team and we&apos;ll respond within 48 hours.
                         </p>
                         <Link href="/contact">
                             <motion.div

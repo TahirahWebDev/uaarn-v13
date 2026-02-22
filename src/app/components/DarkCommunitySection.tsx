@@ -6,7 +6,7 @@ import ScaleIn from './animations/ScaleIn';
 import StaggerContainer from './animations/StaggerContainer';
 import CountUp from './animations/CountUp';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Users, Star } from 'lucide-react';
+import { Github, Linkedin, Users } from 'lucide-react';
 import TypewriterText from './animations/TypewriterText';
 
 const DarkCommunitySection: React.FC = () => {
