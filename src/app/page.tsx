@@ -13,7 +13,7 @@ import ScaleIn from "./components/animations/ScaleIn";
 import StaggerContainer from "./components/animations/StaggerContainer";
 import FloatingElement from "./components/animations/FloatingElement";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -23,6 +23,44 @@ export default function HomePage() {
   });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  // ── Typewriter: line1 once on load, line2 loops forever ──────
+  const LINE1 = "Master Any Topic with";
+  const LINE2 = "Precision Intelligence";
+  const [line1, setLine1] = useState("");
+  const [line2, setLine2] = useState("");
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    const TSPEED = 10;   // ms/char typing
+    const DSPEED = 8;   // ms/char deleting
+    const PAUSE = 1600; // ms pause after full text
+
+    // Line 2 loop (type → pause → delete → repeat)
+    let j = 0;
+    function typeL2() {
+      j++; setLine2(LINE2.slice(0, j));
+      if (j < LINE2.length) timer = setTimeout(typeL2, TSPEED);
+      else timer = setTimeout(delL2, PAUSE);
+    }
+    function delL2() {
+      j--; setLine2(LINE2.slice(0, j));
+      if (j > 0) timer = setTimeout(delL2, DSPEED);
+      else timer = setTimeout(typeL2, 300);
+    }
+
+    // Line 1 types once, then kicks off line 2 loop
+    let i = 0;
+    function typeL1() {
+      i++; setLine1(LINE1.slice(0, i));
+      if (i < LINE1.length) timer = setTimeout(typeL1, TSPEED);
+      else timer = setTimeout(typeL2, 250);
+    }
+
+    timer = setTimeout(typeL1, 300);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="bg-[#E2E2E0] text-[#0E2931] selection:bg-[#861211]/20 min-h-screen overflow-x-hidden">
@@ -92,39 +130,25 @@ export default function HomePage() {
             />
           </FadeIn>
 
-          {/* Main headline with letter stagger */}
-          <SlideIn direction="up" delay={0.4} className="mb-8">
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-[#0E2931] leading-[0.9]">
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-                className="block"
-              >
-                Master Any Topic with
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.75, duration: 0.7 }}
-                className="bg-gradient-to-r from-[#2B7574] via-[#861211] to-[#12484C] bg-clip-text text-transparent italic pr-4 pb-3 inline-block"
-                style={{
-                  backgroundSize: "200% auto",
-                }}
-              >
-                <motion.span
-                  animate={{
-                    backgroundPosition: ["0% center", "200% center", "0% center"],
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  className="bg-gradient-to-r from-[#2B7574] via-[#861211] to-[#12484C] bg-clip-text text-transparent italic pr-4 pb-3 inline-block"
-                  style={{ backgroundSize: "200% auto" }}
-                >
-                  Precision Intelligence
-                </motion.span>
-              </motion.span>
+          {/* Main headline — letter-by-letter typewriter */}
+          <div className="mb-8">
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-[#0E2931] leading-[0.9] text-center">
+              {/* Line 1 — cursor when line2 is empty */}
+              <span className="block min-h-[1.1em]">
+                {line1}
+                {line2.length === 0 && line1.length > 0 && (
+                  <span className="inline-block w-[3px] h-[0.85em] bg-[#0E2931] align-middle ml-[2px] animate-pulse" />
+                )}
+              </span>
+              {/* Line 2 — gradient; cursor while it has any text */}
+              <span className="bg-gradient-to-r from-[#2B7574] via-[#861211] to-[#12484C] bg-clip-text text-transparent italic pr-4 pb-3 inline-block min-h-[1.1em]">
+                {line2}
+                {line2.length > 0 && (
+                  <span className="inline-block w-[3px] h-[0.85em] bg-[#861211] align-middle ml-[2px] animate-pulse" />
+                )}
+              </span>
             </h1>
-          </SlideIn>
+          </div>
 
           {/* Subtext */}
           <FadeIn delay={0.9}>
