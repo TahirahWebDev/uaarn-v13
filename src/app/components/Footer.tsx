@@ -23,10 +23,10 @@ function XIcon({ size = 18 }: { size?: number }) {
 
 /* ─── DATA ─────────────────────────────────────────────────────── */
 const socialLinks = [
-  { href: "https://linkedin.com/company/nexa-agent", CustomIcon: null, icon: Linkedin, label: "LinkedIn", color: "#0A66C2" },
+  { href: "https://www.linkedin.com/company/nexa-agent/", CustomIcon: null, icon: Linkedin, label: "LinkedIn", color: "#0A66C2" },
   { href: "https://x.com/nexa_agent25", CustomIcon: XIcon, icon: null, label: "X", color: "#000000" },
-  { href: "https://instagram.com/uaarn", CustomIcon: null, icon: Instagram, label: "Instagram", color: "#E1306C" },
-  { href: "https://facebook.com/uaarn", CustomIcon: null, icon: Facebook, label: "Facebook", color: "#1877F2" },
+  { href: "https://www.instagram.com/nexeagent?igsh=Z2J0M3o3M3NtNmdr", CustomIcon: null, icon: Instagram, label: "Instagram", color: "#E1306C" },
+  { href: "https://www.facebook.com/share/1DrNcNCVJL/", CustomIcon: null, icon: Facebook, label: "Facebook", color: "#1877F2" },
   { href: "mailto:nexeagent@gmail.com", CustomIcon: null, icon: Mail, label: "Email", color: "#861211" },
 ];
 
