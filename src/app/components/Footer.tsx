@@ -27,7 +27,7 @@ const socialLinks = [
   { href: "https://x.com/nexa_agent25", CustomIcon: XIcon, icon: null, label: "X", color: "#000000" },
   { href: "https://instagram.com/uaarn", CustomIcon: null, icon: Instagram, label: "Instagram", color: "#E1306C" },
   { href: "https://facebook.com/uaarn", CustomIcon: null, icon: Facebook, label: "Facebook", color: "#1877F2" },
-  { href: "mailto:support@uaarn.com", CustomIcon: null, icon: Mail, label: "Email", color: "#861211" },
+  { href: "mailto:nexeagent@gmail.com", CustomIcon: null, icon: Mail, label: "Email", color: "#861211" },
 ];
 
 const footerLinks = {
@@ -59,7 +59,7 @@ function Marquee({ text, reverse = false }: { text: string; reverse?: boolean })
         animate={{ x: reverse ? ["0%", "50%"] : ["0%", "-50%"] }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
       >
-        <span className="text-[7vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-white/[0.10]">
+        <span className="text-[6vw] md:text-[3vw] font-black uppercase tracking-tighter leading-none text-white/[0.10]">
           {repeated}
         </span>
       </motion.div>
