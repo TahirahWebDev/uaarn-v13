@@ -67,7 +67,7 @@ export default function HomePage() {
     <div className="bg-[#E2E2E0] text-[#0E2931] selection:bg-[#861211]/20 min-h-screen overflow-x-hidden">
 
       {/* Hero Section */}
-      <section ref={heroRef} className="relative overflow-hidden pt-10 pb-32 px-8 min-h-[90vh] flex items-center">
+      <section ref={heroRef} className="relative pt-10 pb-32 px-8 min-h-[90vh] flex items-center overflow-x-hidden">
 
         {/* Animated background blobs */}
         <motion.div
@@ -209,16 +209,18 @@ export default function HomePage() {
               { label: "AI Interactions", value: "1K+", color: "#861211" },
               { label: "Satisfaction", value: "98%", color: "#12484C" },
             ].map((stat, i) => (
-              <FloatingElement key={stat.label} delay={i * 0.4} amplitude={6} duration={3 + i * 0.5}>
-                <motion.div
-                  whileHover={{ scale: 1.08, y: -4 }}
-                  className="px-5 py-2.5 bg-white rounded-2xl shadow-sm border border-[#0E2931]/5 flex items-center gap-3 cursor-default"
-                >
-                  <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: stat.color }} />
-                  <span className="text-xs font-bold text-[#0E2931]/50 uppercase tracking-widest">{stat.label}</span>
-                  <span className="text-sm font-black text-[#0E2931]" style={{ color: stat.color }}>{stat.value}</span>
-                </motion.div>
-              </FloatingElement>
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.6 + i * 0.15, duration: 0.4 }}
+                whileHover={{ scale: 1.06 }}
+                className="px-5 py-2.5 bg-white rounded-2xl shadow-sm border border-[#0E2931]/5 flex items-center gap-3 cursor-default"
+              >
+                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: stat.color }} />
+                <span className="text-xs font-bold text-[#0E2931]/50 uppercase tracking-widest whitespace-nowrap">{stat.label}</span>
+                <span className="text-sm font-black" style={{ color: stat.color }}>{stat.value}</span>
+              </motion.div>
             ))}
           </FadeIn>
         </motion.div>
@@ -304,6 +306,6 @@ export default function HomePage() {
           </FadeIn>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

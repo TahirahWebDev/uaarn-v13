@@ -5,7 +5,6 @@ import { Target, Lightbulb, Shield, Sparkles, Zap, Globe } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import SlideIn from "../components/animations/SlideIn";
-import ScaleIn from "../components/animations/ScaleIn";
 import FloatingElement from "../components/animations/FloatingElement";
 import TypewriterText from "../components/animations/TypewriterText";
 
@@ -21,32 +20,6 @@ const team = [
   { name: "Tahirah Roohi", role: "Co-Founder & Frontend Lead", img: "/tahira.jpg", desc: "Designs modern interfaces and improves user experience for the platform.", delay: 0.24 },
 ];
 
-function AnimatedHeading({ text, highlight }: { text: string; highlight: string }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  const fullText = `${text} ${highlight}`;
-  return (
-    <motion.h2
-      ref={ref}
-      className="text-5xl md:text-6xl font-black text-[#0E2931] tracking-tighter uppercase leading-[0.85]"
-    >
-      {text}{" "}
-      <motion.span className="text-[#861211] italic inline-block pr-2">
-        {highlight.split("").map((ch, i) => (
-          <motion.span
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4 + i * 0.04, duration: 0.3 }}
-            className="inline-block"
-          >
-            {ch}
-          </motion.span>
-        ))}
-      </motion.span>
-    </motion.h2>
-  );
-}
 
 export default function AboutPage() {
   const missionRef = useRef(null);
@@ -67,22 +40,6 @@ export default function AboutPage() {
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
 
-      {/* Floating particles */}
-      {[...Array(5)].map((_, i) => (
-        <FloatingElement key={i} delay={i * 0.8} amplitude={14} duration={3 + i * 0.5}>
-          <motion.div
-            className="absolute rounded-full"
-            style={{
-              width: [6, 8, 5, 10, 7][i],
-              height: [6, 8, 5, 10, 7][i],
-              background: i % 2 === 0 ? "#2B7574" : "#861211",
-              opacity: 0.12,
-              left: `${[5, 90, 15, 80, 50][i]}%`,
-              top: `${[15, 25, 55, 70, 40][i]}%`,
-            }}
-          />
-        </FloatingElement>
-      ))}
 
       {/* ─── HERO HEADING ─── */}
       <div className="max-w-4xl text-center space-y-10 pt-20 pb-24 w-full">
