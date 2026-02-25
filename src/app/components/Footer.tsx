@@ -1,16 +1,13 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Linkedin, Mail, Instagram, Facebook, ArrowUpRight } from "lucide-react";
+import { Linkedin, Mail, Instagram, Facebook, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import {
   motion,
   useScroll,
   useTransform,
-  useSpring,
-  useInView,
 } from "framer-motion";
-import { useRef } from "react";
 
 /* ─── X (formerly Twitter) icon ────────────────────────────────── */
 function XIcon({ size = 18 }: { size?: number }) {
@@ -43,211 +40,110 @@ const footerLinks = {
   ],
 };
 
-/* ─── MARQUEE (Option A) ─────────────────────────────────────────
-   Infinite horizontal ticker of giant UAARN text in both directions.
-   Pure CSS animation — zero jank, hardware accelerated.
-──────────────────────────────────────────────────────────────────── */
-const TICKER_A = "UAARN • AI LEARNING • KNOWLEDGE • RESILIENCE • NEURAL PATH • ";
-const TICKER_B = "COURSES • ASK AI • CAREER MENTOR • QUIZ ENGINE • SUMMARIZE • ";
-
-function Marquee({ text, reverse = false }: { text: string; reverse?: boolean }) {
-  const repeated = Array(6).fill(text).join("");
-  return (
-    <div className="overflow-hidden whitespace-nowrap select-none">
-      <motion.div
-        className="inline-block"
-        animate={{ x: reverse ? ["0%", "50%"] : ["0%", "-50%"] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-      >
-        <span className="text-[6vw] md:text-[3vw] font-black uppercase tracking-tighter leading-none text-white/[0.10]">
-          {repeated}
-        </span>
-      </motion.div>
-    </div>
-  );
-}
-
-/* ─── FOOTER ────────────────────────────────────────────────────── */
 export default function Footer() {
-  /* Option B: 3-D perspective scroll reveal */
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const { scrollYProgress } = useScroll({
-    target: wrapperRef,
-    offset: ["start end", "start 0.2"],
+    target: containerRef,
+    offset: ["start end", "end end"],
   });
 
-  // rotateX from 35 → 0, opacity 0 → 1, y from 80 → 0
-  const rawRotate = useTransform(scrollYProgress, [0, 1], [35, 0]);
-  const rawOpacity = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
-  const rawY = useTransform(scrollYProgress, [0, 1], [80, 0]);
-
-  const rotateX = useSpring(rawRotate, { stiffness: 80, damping: 20 });
-  const opacity = useSpring(rawOpacity, { stiffness: 80, damping: 20 });
-  const y = useSpring(rawY, { stiffness: 80, damping: 20 });
-
-  const badgeRef = useRef(null);
-  const badgeInView = useInView(badgeRef, { once: true });
+  const giantTextOpacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
+  const giantTextScale = useTransform(scrollYProgress, [0.8, 1], [0.98, 1]);
 
   return (
-    /*
-     * The outer wrapper has a large perspective so that the footer card
-     * can rotate in 3-D as the user scrolls it into view (Option B).
-     */
-    <div ref={wrapperRef} style={{ perspective: "1200px" }} className="bg-[#0E2931] overflow-hidden">
+    <footer
+      ref={containerRef}
+      className="bg-[#0E2931] text-white pt-20 pb-8 px-6 md:px-12 overflow-hidden border-t border-white/5"
+    >
+      <div className="max-w-7xl mx-auto">
 
-      {/* ── Option A — MARQUEE BILLBOARD ─────────────────────────── */}
-      <div className="pt-16 pb-0 pointer-events-none space-y-1">
-        <Marquee text={TICKER_A} />
-        <Marquee text={TICKER_B} reverse />
-      </div>
-
-      {/* ── Option B — 3-D TILT REVEAL CARD ─────────────────────── */}
-      <motion.div
-        style={{ rotateX, opacity, y, transformOrigin: "top center" }}
-        className="bg-[#0E2931] border-t border-[#2B7574]/20 pt-16 pb-12 px-6"
-      >
-        <div className="max-w-7xl mx-auto relative">
-
-          {/* ── BG watermark UAARN ────────────────────────────── */}
-          <div ref={badgeRef} className="absolute inset-0 overflow-hidden pointer-events-none z-0 select-none flex items-center justify-center">
-            <motion.span
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={badgeInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-black uppercase tracking-tighter text-white/[0.08] leading-none whitespace-nowrap w-full text-center"
-              style={{ fontSize: "clamp(4rem, 22vw, 22rem)" }}
-            >
-              UAARN
-            </motion.span>
+        {/* Top Section */}
+        <div className="flex flex-col md:flex-row justify-between items-start mb-12 gap-8">
+          <div className="relative w-48 h-12">
+            <Image
+              src="/logo2.png"
+              alt="UAARN Logo"
+              fill
+              className="object-contain object-left"
+            />
           </div>
-
-          {/* Top grid ─ brand + nav + connect */}
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-
-            {/* Brand */}
-            <div className="md:col-span-2 space-y-6 md:pr-16">
-              <motion.div whileHover={{ scale: 1.04 }} transition={{ type: "spring", stiffness: 300 }}>
-                <Link href="/" className="inline-block">
-                  <div className="relative w-40 h-12">
-                    <Image src="/logo2.png" alt="UAARN Logo" fill className="object-contain object-left" />
-                  </div>
-                </Link>
-              </motion.div>
-
-              <p className="text-[#E2E2E0]/60 text-sm md:text-base leading-relaxed max-w-md font-medium italic">
-                Empowering the next generation of learners with high-fidelity AI intelligence.
-                Bridging the gap between complex information and total clarity.
-              </p>
-
-              {/* Social icons */}
-              <div className="flex gap-4 pt-2">
-                {socialLinks.map(({ href, icon, CustomIcon, label, color }, i) => {
-                  const LIcon = icon as React.ElementType | null;
-                  return (
-                    <motion.div
-                      key={href}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2 + i * 0.08 }}
-                    >
-                      <Link href={href} target={href.startsWith("http") ? "_blank" : undefined} aria-label={label}>
-                        <motion.div
-                          className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#E2E2E0]/50 hover:text-white transition-colors cursor-pointer"
-                          whileHover={{ scale: 1.2, y: -4, backgroundColor: color, borderColor: color, color: "#ffffff" }}
-                          whileTap={{ scale: 0.9 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                        >
-                          {CustomIcon ? <CustomIcon size={18} /> : LIcon ? <LIcon size={18} /> : null}
-                        </motion.div>
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Navigation */}
-            <div className="grid grid-cols-2 gap-8 md:col-span-1">
-              {Object.entries(footerLinks).map(([section, links], si) => (
-                <div key={section} className="space-y-4">
-                  <motion.h4
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 + si * 0.08 }}
-                    className="text-[#2B7574] font-black text-xs uppercase tracking-[0.25em]"
-                  >
-                    {section}
-                  </motion.h4>
-                  <ul className="space-y-3 text-[11px] font-bold uppercase tracking-widest">
-                    {links.map((link, li) => (
-                      <motion.li
-                        key={link.label}
-                        initial={{ opacity: 0, x: -8 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.15 + si * 0.08 + li * 0.05 }}
-                      >
-                        <Link href={link.href}>
-                          <motion.span
-                            className="text-[#E2E2E0]/60 hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1 group"
-                            whileHover={{ x: 4 }}
-                            transition={{ type: "spring", stiffness: 400 }}
-                          >
-                            {link.label}
-                            <motion.span
-                              className="opacity-0 group-hover:opacity-100 transition-opacity"
-                            >
-                              <ArrowUpRight size={10} />
-                            </motion.span>
-                          </motion.span>
-                        </Link>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-
-          </div>
-
-          {/* ── Bottom bar ───────────────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.3em] text-[#E2E2E0]/20 font-black"
-          >
-            <div className="flex items-center gap-2">
-              <motion.div
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-1 h-1 rounded-full bg-[#2B7574]"
-              />
-              © {new Date().getFullYear()} UAARN Labs. All Rights Reserved.
-            </div>
-            <div className="flex gap-6">
-              {[
-                { label: "Terms of Service", href: "/terms" },
-                { label: "Privacy Policy", href: "/privacy" },
-              ].map(({ label, href }) => (
-                <Link key={href} href={href}>
-                  <motion.span
-                    whileHover={{ color: "rgba(226,226,224,0.6)" }}
-                    className="cursor-pointer"
-                  >
-                    {label}
-                  </motion.span>
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-
         </div>
-      </motion.div>
-    </div>
+
+        {/* Navigation Grid - 3 Columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
+          {Object.entries(footerLinks).map(([title, links]) => (
+            <div key={title} className="flex flex-col gap-4">
+              <h4 className="text-[#2B7574] font-black text-xs uppercase tracking-[0.25em] mb-2">{title}</h4>
+              <ul className="flex flex-col gap-3">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-[#E2E2E0]/60 hover:text-white transition-all text-[11px] font-bold uppercase tracking-widest inline-flex items-center gap-1 group"
+                    >
+                      {link.label}
+                      <motion.span className="opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ArrowUpRight size={10} />
+                      </motion.span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {/* Social Connect - Positioned on the Right */}
+          <div className="flex flex-col gap-6 lg:items-end">
+            <h4 className="text-[#2B7574] font-black text-xs uppercase tracking-[0.25em]">Connect</h4>
+            <div className="flex flex-wrap gap-3 lg:justify-end">
+              {socialLinks.map(({ href, icon, CustomIcon, label, color }) => {
+                const Icon = icon as React.ElementType | null;
+                return (
+                  <motion.a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center text-white/50 border border-white/10 transition-all"
+                    whileHover={{
+                      scale: 1.1,
+                      backgroundColor: color,
+                      borderColor: color,
+                      color: "#fff"
+                    }}
+                  >
+                    {CustomIcon ? <CustomIcon size={18} /> : Icon ? <Icon size={18} /> : null}
+                  </motion.a>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Giant Branding Area - Tight Spacing & White Text */}
+        <motion.div
+          style={{ opacity: giantTextOpacity, scale: giantTextScale }}
+          className="relative py-4 select-none pointer-events-none"
+        >
+          <h1 className="text-[22vw] font-black leading-[0.7] tracking-tighter text-white text-center">
+            UAARN
+          </h1>
+        </motion.div>
+
+        {/* Legal Bar */}
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-[#E2E2E0]/20 font-black flex items-center gap-2">
+            <div className="w-1 h-1 rounded-full bg-[#2B7574]" />
+            © {new Date().getFullYear()} UAARN Labs. All Rights Reserved.
+          </div>
+
+          <div className="flex gap-8 text-[10px] font-black text-[#E2E2E0]/20 uppercase tracking-[0.3em]">
+            <Link href="/terms" className="hover:text-white/60 transition-all">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-white/60 transition-all">Privacy Policy</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 }

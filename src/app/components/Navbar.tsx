@@ -1,211 +1,123 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import Image from "next/image"; 
+import { Menu, X, LayoutDashboard, MessageSquare, BookOpen, Info, Mail } from "lucide-react";
 import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
 import UpgradeButton from "./upgradeButton";
-import { motion } from "framer-motion";
 
-// Update the function signature to remove onOpenPlans
-import PlansModal from "./PlansModal";
-
-export default function Navbar() {
+export default function Navbar({ onOpenPlans }: { onOpenPlans: () => void }) {
   const { isSignedIn } = useUser();
   const [open, setOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [hoveredPath, setHoveredPath] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
-  const handleOpenPlans = () => setIsModalOpen(true);
-
-  const containerVariants = {
-    hidden: { y: -100, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  };
+  // Add a scroll listener to change opacity when scrolling
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <>
-      <motion.nav
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="sticky top-0 z-50 flex items-center justify-between px-6 md:px-10 py-4 bg-[#E2E2E0]/80 backdrop-blur-md"
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 transition-all duration-300">
+      <nav 
+        className={`
+          flex items-center justify-between w-full max-w-7xl px-6 py-3 
+          rounded-2xl border transition-all duration-500
+          ${scrolled 
+            ? "bg-[#E2E2E0]/90 backdrop-blur-xl border-[#0E2931]/10 shadow-lg" 
+            : "bg-white/70 backdrop-blur-md border-white/40 shadow-sm"}
+        `}
       >
-        {/* Animated Bottom Border */}
-        <motion.div
-          className="absolute bottom-0 left-0 w-full h-[1px] bg-[#0E2931]/10"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1.5, ease: "circOut", delay: 0.2 }}
-          style={{ originX: 0 }}
-        />
+        
         {/* LOGO SECTION */}
-        <motion.div
-          variants={itemVariants}
-          className="flex items-center gap-3"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-36 h-12 overflow-hidden rounded-xl p-1.5 transition-all">
-              <Image
-                src="/logo.png"
-                alt="UAARN Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
+        <Link href="/" className="flex items-center gap-2 group shrink-0">
+          <div className="relative w-28 h-10 transition-transform duration-300 group-hover:scale-105">
+            <Image 
+              src="/logo.png" 
+              alt="UAARN Logo"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+        </Link>
+
+        {/* DESKTOP NAVIGATION - Centered & Minimal */}
+        <div className="hidden lg:flex items-center bg-[#0E2931]/5 px-6 py-2 rounded-full border border-[#0E2931]/5 space-x-8 text-[#0E2931] text-[12px] font-bold uppercase tracking-widest">
+          <Link href="/about" className=" text-[#2B7574] hover:text-[#861211] transition-colors">About</Link>
+          <Link href="/courses" className=" text-[#2B7574] hover:text-[#861211] transition-colors">Courses</Link>
+          <Link href="/ask" className="flex items-center gap-1.5 text-[#2B7574] hover:text-[#861211]">
+            <MessageSquare size={14} /> Ask AI
           </Link>
-        </motion.div>
-
-        {/* DESKTOP NAVIGATION */}
-        <motion.div
-          variants={itemVariants}
-          className="hidden lg:flex items-center space-x-2 text-[#0E2931] text-[13px] font-black uppercase tracking-[0.1em]"
-        >
-          {[
-            { name: "Home", path: "/" },
-            { name: "About", path: "/about" },
-            { name: "Courses", path: "/courses" },
-            { name: "Ask AI", path: "/ask" },
-            { name: "Contact", path: "/contact" },
-          ].map((link) => {
-            const isHovered = hoveredPath === link.path;
-            return (
-              <Link
-                key={link.name}
-                href={link.path}
-                className="relative px-3 py-2"
-                onMouseEnter={() => setHoveredPath(link.path)}
-                onMouseLeave={() => setHoveredPath(null)}
-              >
-                <span className={`relative z-10 transition-colors duration-300 ${isHovered ? "text-[#861211]" : "text-[#0E2931]"}`}>
-                  {link.name}
-                </span>
-
-                {/* The Pro Center-Out Underline */}
-                <motion.div
-                  className="absolute left-0 right-0 bottom-0 h-[2px] bg-[#861211]"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: isHovered ? 1 : 0 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  style={{ originX: 0.5 }}
-                />
-              </Link>
-            );
-          })}
-
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="ml-6">
-            <Link href="/role-selection" className="bg-[#0E2931] text-white px-5 py-2.5 rounded-full hover:bg-[#12484C] transition-all shadow-md">Dashboard</Link>
-          </motion.div>
-        </motion.div>
+          <Link href="/contact" className=" text-[#2B7574] hover:text-[#861211] transition-colors">Contact</Link>
+        </div>
 
         {/* ACTION BUTTONS */}
-        <motion.div variants={itemVariants} className="flex items-center gap-4">
-          <motion.div className="hidden sm:block scale-95" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            {/* Pass onOpenPlans to UpgradeButton */}
-            <UpgradeButton onClickAction={handleOpenPlans} />
-          </motion.div>
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:block scale-90 origin-right">
+              <UpgradeButton onClickAction={onOpenPlans} />
+          </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
             {isSignedIn ? (
-              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <>
+                <Link 
+                  href="/role-selection" 
+                  className="hidden md:flex items-center gap-2 bg-[#0E2931] text-white px-4 py-2 rounded-xl text-[11px] font-bold uppercase tracking-wider hover:bg-[#12484C] transition-all"
+                >
+                  <LayoutDashboard size={14} /> Dashboard
+                </Link>
                 <div className="border-2 border-[#861211]/20 rounded-full p-0.5 hover:border-[#861211] transition-all">
                   <UserButton afterSignOutUrl="/" />
                 </div>
-              </motion.div>
+              </>
             ) : (
               <SignInButton mode="modal">
-                <motion.button
-                  whileHover={{ scale: 1.05, backgroundColor: "#6a0e0d" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-[#861211] text-white px-7 py-3 rounded-full font-black text-[11px] uppercase tracking-widest transition-all shadow-xl shadow-[#861211]/20"
-                >
+                <button className="bg-[#861211] hover:bg-[#6a0e0d] text-white px-6 py-2.5 rounded-xl font-bold text-[11px] uppercase tracking-widest transition-all shadow-lg shadow-[#861211]/10 active:scale-95">
                   Sign In
-                </motion.button>
+                </button>
               </SignInButton>
             )}
           </div>
 
           {/* MOBILE MENU TOGGLE */}
-          <motion.button
-            whileHover={{ scale: 1.1, rotate: 90 }}
-            whileTap={{ scale: 0.9 }}
-            className="lg:hidden text-[#0E2931] p-1 hover:bg-[#0E2931]/5 rounded-lg transition-colors"
+          <button
+            className="lg:hidden text-[#0E2931] p-2 hover:bg-[#0E2931]/5 rounded-xl transition-colors"
             onClick={() => setOpen(!open)}
           >
-            {open ? <X size={28} /> : <Menu size={28} />}
-          </motion.button>
-        </motion.div>
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
 
-        {/* MOBILE NAVIGATION */}
+        {/* MOBILE NAVIGATION - Drawer Style */}
         {open && (
-          <div className="absolute top-full left-0 w-full bg-[#E2E2E0] border-t border-[#0E2931]/10 shadow-2xl flex flex-col items-center py-12 space-y-8 text-[#0E2931] lg:hidden animate-in fade-in slide-in-from-top-5 duration-300">
-            {[
-              { name: "Home", path: "/" },
-              { name: "About", path: "/about" },
-              { name: "Courses", path: "/courses" },
-              { name: "Ask AI", path: "/ask" },
-              { name: "Contact", path: "/contact" },
-              { name: "Dashboard", path: "/role-selection" }
-            ].map((link) => {
-              const isHovered = hoveredPath === link.path;
-              return (
-                <Link
-                  key={link.name}
-                  href={link.path}
-                  className="relative text-lg font-black uppercase tracking-[0.2em] px-2 py-1"
-                  onClick={() => setOpen(false)}
-                  onMouseEnter={() => setHoveredPath(link.path)}
-                  onMouseLeave={() => setHoveredPath(null)}
-                >
-                  <span className={`relative z-10 transition-colors duration-300 ${isHovered ? "text-[#861211]" : "text-[#0E2931]"}`}>
-                    {link.name}
-                  </span>
-                  {/* Mobile Center-Out Underline */}
-                  <motion.div
-                    className="absolute left-0 right-0 bottom-0 h-[2px] bg-[#861211]"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: isHovered ? 1 : 0 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    style={{ originX: 0.5 }}
-                  />
-                </Link>
-              );
-            })}
-
-            <div className="pt-6 flex flex-col items-center gap-6 w-full px-10">
+          <div className="absolute top-[calc(100%+12px)] left-0 right-0 mx-auto w-full max-w-[95%] bg-[#E2E2E0] border border-[#0E2931]/10 rounded-3xl shadow-2xl p-8 flex flex-col space-y-6 text-[#0E2931] lg:hidden animate-in fade-in slide-in-from-top-4 duration-300">
+            <Link href="/about" className="flex items-center gap-4 text-lg font-bold" onClick={() => setOpen(false)}>
+              <Info className="text-[#861211]" /> About
+            </Link>
+            <Link href="/courses" className="flex items-center gap-4 text-lg font-bold" onClick={() => setOpen(false)}>
+              <BookOpen className="text-[#861211]" /> Courses
+            </Link>
+            <Link href="/ask" className="flex items-center gap-4 text-lg font-bold text-[#2B7574]" onClick={() => setOpen(false)}>
+              <MessageSquare /> Ask AI
+            </Link>
+            <Link href="/contact" className="flex items-center gap-4 text-lg font-bold" onClick={() => setOpen(false)}>
+              <Mail className="text-[#861211]" /> Contact
+            </Link>
+            
+            <div className="pt-4 flex flex-col gap-4">
               <div className="w-full h-px bg-[#0E2931]/10" />
-              {/* Pass onOpenPlans to UpgradeButton in Mobile View */}
-              <UpgradeButton onClickAction={handleOpenPlans} />
-              {!isSignedIn && (
-                <SignInButton mode="modal">
-                  <button className="w-full bg-[#0E2931] text-white py-5 rounded-full font-black text-sm uppercase tracking-[0.2em]">
-                    Initialize Session
-                  </button>
-                </SignInButton>
+              <UpgradeButton onClickAction={onOpenPlans} />
+              {isSignedIn && (
+                 <Link href="/role-selection" className="w-full bg-[#0E2931] text-white py-4 rounded-2xl font-bold text-center uppercase tracking-widest" onClick={() => setOpen(false)}>
+                  Dashboard
+                </Link>
               )}
             </div>
           </div>
         )}
-      </motion.nav>
-      {isModalOpen && (
-        <PlansModal onCloseAction={() => setIsModalOpen(false)} />
-      )}
-    </>
+      </nav>
+    </div>
   );
 }
