@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Linkedin, Mail, Instagram, Facebook, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { Linkedin, Mail, Instagram, Facebook, ArrowUpRight } from "lucide-react";
 import {
   motion,
   useScroll,

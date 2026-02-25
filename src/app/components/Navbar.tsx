@@ -1,12 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; 
+import Image from "next/image";
 import { Menu, X, LayoutDashboard, MessageSquare, BookOpen, Info, Mail } from "lucide-react";
 import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
 import UpgradeButton from "./upgradeButton";
 
-export default function Navbar({ onOpenPlans }: { onOpenPlans: () => void }) {
+export default function Navbar({ onOpenPlans }: { onOpenPlans?: () => void }) {
   const { isSignedIn } = useUser();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -20,21 +20,21 @@ export default function Navbar({ onOpenPlans }: { onOpenPlans: () => void }) {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 transition-all duration-300">
-      <nav 
+      <nav
         className={`
           flex items-center justify-between w-full max-w-7xl px-6 py-3 
           rounded-2xl border transition-all duration-500
-          ${scrolled 
-            ? "bg-[#E2E2E0]/90 backdrop-blur-xl border-[#0E2931]/10 shadow-lg" 
+          ${scrolled
+            ? "bg-[#E2E2E0]/90 backdrop-blur-xl border-[#0E2931]/10 shadow-lg"
             : "bg-white/70 backdrop-blur-md border-white/40 shadow-sm"}
         `}
       >
-        
+
         {/* LOGO SECTION */}
         <Link href="/" className="flex items-center gap-2 group shrink-0">
           <div className="relative w-28 h-10 transition-transform duration-300 group-hover:scale-105">
-            <Image 
-              src="/logo.png" 
+            <Image
+              src="/logo.png"
               alt="UAARN Logo"
               fill
               className="object-contain"
@@ -56,14 +56,14 @@ export default function Navbar({ onOpenPlans }: { onOpenPlans: () => void }) {
         {/* ACTION BUTTONS */}
         <div className="flex items-center gap-3">
           <div className="hidden sm:block scale-90 origin-right">
-              <UpgradeButton onClickAction={onOpenPlans} />
+            <UpgradeButton onClickAction={onOpenPlans} />
           </div>
 
           <div className="flex items-center gap-3">
             {isSignedIn ? (
               <>
-                <Link 
-                  href="/role-selection" 
+                <Link
+                  href="/role-selection"
                   className="hidden md:flex items-center gap-2 bg-[#0E2931] text-white px-4 py-2 rounded-xl text-[11px] font-bold uppercase tracking-wider hover:bg-[#12484C] transition-all"
                 >
                   <LayoutDashboard size={14} /> Dashboard
@@ -105,12 +105,12 @@ export default function Navbar({ onOpenPlans }: { onOpenPlans: () => void }) {
             <Link href="/contact" className="flex items-center gap-4 text-lg font-bold" onClick={() => setOpen(false)}>
               <Mail className="text-[#861211]" /> Contact
             </Link>
-            
+
             <div className="pt-4 flex flex-col gap-4">
               <div className="w-full h-px bg-[#0E2931]/10" />
               <UpgradeButton onClickAction={onOpenPlans} />
               {isSignedIn && (
-                 <Link href="/role-selection" className="w-full bg-[#0E2931] text-white py-4 rounded-2xl font-bold text-center uppercase tracking-widest" onClick={() => setOpen(false)}>
+                <Link href="/role-selection" className="w-full bg-[#0E2931] text-white py-4 rounded-2xl font-bold text-center uppercase tracking-widest" onClick={() => setOpen(false)}>
                   Dashboard
                 </Link>
               )}
