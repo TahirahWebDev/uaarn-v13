@@ -56,7 +56,7 @@ const team = [
 ];
 
 export default function AboutPage() {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -131,7 +131,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.4, ease: "circOut" }}
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
-                onDragEnd={(_e: any, info: PanInfo) => {
+                onDragEnd={(event, info: PanInfo) => {
                   if (info.offset.x < -100) setActiveIndex((prev) => (prev + 1) % missionCards.length);
                   if (info.offset.x > 100) setActiveIndex((prev) => (prev - 1 + missionCards.length) % missionCards.length);
                 }}
@@ -173,91 +173,91 @@ export default function AboutPage() {
           </div>
 
           {/* DESKTOP GRID - Only visible on md+ */}
-<div className="hidden md:contents">
-  {/* Card 1: Precision */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
-    whileHover={{ y: -10, scale: 1.02 }}
-    className="md:col-span-2 bg-white/70 backdrop-blur-xl border border-white p-8 rounded-[2.5rem] flex flex-col justify-between group shadow-sm hover:shadow-2xl transition-all duration-500"
-  >
-    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#861211] to-[#6a0e0d] flex items-center justify-center text-white shadow-lg">
-      <Target size={24} className="group-hover:rotate-12 transition-transform" />
-    </div>
-    <div className="mt-8">
-      <h3 className="text-2xl font-black uppercase tracking-tighter mb-1 group-hover:text-[#861211] transition-colors">
-        {missionCards[0].title}
-      </h3>
-      <p className="text-[#0E2931]/60 text-sm font-medium italic max-w-md">
-        {missionCards[0].desc}
-      </p>
-    </div>
-  </motion.div>
+          <div className="hidden md:contents">
+            {/* Card 1: Precision */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              whileHover={{ y: -10, scale: 1.02 }}
+              className="md:col-span-2 bg-white/70 backdrop-blur-xl border border-white p-8 rounded-[2.5rem] flex flex-col justify-between group shadow-sm hover:shadow-2xl transition-all duration-500"
+            >
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#861211] to-[#6a0e0d] flex items-center justify-center text-white shadow-lg">
+                <Target size={24} className="group-hover:rotate-12 transition-transform" />
+              </div>
+              <div className="mt-8">
+                <h3 className="text-2xl font-black uppercase tracking-tighter mb-1 group-hover:text-[#861211] transition-colors">
+                  {missionCards[0].title}
+                </h3>
+                <p className="text-[#0E2931]/60 text-sm font-medium italic max-w-md">
+                  {missionCards[0].desc}
+                </p>
+              </div>
+            </motion.div>
 
-  {/* Card 2: Innovation */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
-    whileHover={{ y: -10, rotate: 1 }}
-    className="md:col-span-1 bg-[#2B7574] p-8 rounded-[2.5rem] flex flex-col justify-between text-white group shadow-lg transition-all duration-500"
-  >
-    <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-       <Lightbulb size={22} className="text-white group-hover:animate-pulse" />
-    </div>
-    <div>
-      <h3 className="text-xl font-black uppercase tracking-tighter mb-1">
-        {missionCards[1].title}
-      </h3>
-      <p className="text-white/70 text-xs font-medium italic leading-relaxed">
-        {missionCards[1].desc}
-      </p>
-    </div>
-  </motion.div>
+            {/* Card 2: Innovation */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              whileHover={{ y: -10, rotate: 1 }}
+              className="md:col-span-1 bg-[#2B7574] p-8 rounded-[2.5rem] flex flex-col justify-between text-white group shadow-lg transition-all duration-500"
+            >
+              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                <Lightbulb size={22} className="text-white group-hover:animate-pulse" />
+              </div>
+              <div>
+                <h3 className="text-xl font-black uppercase tracking-tighter mb-1">
+                  {missionCards[1].title}
+                </h3>
+                <p className="text-white/70 text-xs font-medium italic leading-relaxed">
+                  {missionCards[1].desc}
+                </p>
+              </div>
+            </motion.div>
 
-  {/* Card 3: Resilience */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
-    whileHover={{ y: -10 }}
-    className="md:col-span-1 bg-white p-8 rounded-[2.5rem] border border-[#0E2931]/5 flex flex-col justify-between group transition-all duration-500 shadow-sm hover:shadow-xl"
-  >
-    <div className="w-10 h-10 rounded-lg bg-[#2B7574]/5 flex items-center justify-center text-[#2B7574]">
-       <Shield size={22} className="group-hover:animate-bounce" />
-    </div>
-    <div>
-      <h3 className="text-xl font-black uppercase tracking-tighter mb-1">
-        {missionCards[2].title}
-      </h3>
-      <p className="text-[#0E2931]/50 text-xs font-medium italic leading-relaxed">
-        {missionCards[2].desc}
-      </p>
-    </div>
-  </motion.div>
+            {/* Card 3: Resilience */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              whileHover={{ y: -10 }}
+              className="md:col-span-1 bg-white p-8 rounded-[2.5rem] border border-[#0E2931]/5 flex flex-col justify-between group transition-all duration-500 shadow-sm hover:shadow-xl"
+            >
+              <div className="w-10 h-10 rounded-lg bg-[#2B7574]/5 flex items-center justify-center text-[#2B7574]">
+                <Shield size={22} className="group-hover:animate-bounce" />
+              </div>
+              <div>
+                <h3 className="text-xl font-black uppercase tracking-tighter mb-1">
+                  {missionCards[2].title}
+                </h3>
+                <p className="text-[#0E2931]/50 text-xs font-medium italic leading-relaxed">
+                  {missionCards[2].desc}
+                </p>
+              </div>
+            </motion.div>
 
-  {/* Card 4: Agentic Intelligence */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
-    className="md:col-span-2 bg-[#0E2931] p-8 rounded-[2.5rem] flex items-center justify-between text-[#E2E2E0] relative overflow-hidden shadow-xl group"
-  >
-    <div className="relative z-10">
-      <div className="w-10 h-10 rounded-lg bg-[#861211]/20 flex items-center justify-center text-white mb-4">
-         <Zap size={22} className="group-hover:scale-110 transition-transform" />
-      </div>
-      <h3 className="text-2xl font-black uppercase tracking-tighter mb-1">
-        {missionCards[3].title}
-      </h3>
-      <p className="text-[#E2E2E0]/50 text-sm font-medium max-w-xs italic leading-relaxed">
-        {missionCards[3].desc}
-      </p>
-    </div>
-    <Zap size={140} className="absolute right-[-20px] bottom-[-30px] text-white/5 rotate-12 pointer-events-none" />
-  </motion.div>
-</div>
+            {/* Card 4: Agentic Intelligence */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              className="md:col-span-2 bg-[#0E2931] p-8 rounded-[2.5rem] flex items-center justify-between text-[#E2E2E0] relative overflow-hidden shadow-xl group"
+            >
+              <div className="relative z-10">
+                <div className="w-10 h-10 rounded-lg bg-[#861211]/20 flex items-center justify-center text-white mb-4">
+                  <Zap size={22} className="group-hover:scale-110 transition-transform" />
+                </div>
+                <h3 className="text-2xl font-black uppercase tracking-tighter mb-1">
+                  {missionCards[3].title}
+                </h3>
+                <p className="text-[#E2E2E0]/50 text-sm font-medium max-w-xs italic leading-relaxed">
+                  {missionCards[3].desc}
+                </p>
+              </div>
+              <Zap size={140} className="absolute right-[-20px] bottom-[-30px] text-white/5 rotate-12 pointer-events-none" />
+            </motion.div>
+          </div>
         </div>
       </section>
 
