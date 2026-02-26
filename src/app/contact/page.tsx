@@ -91,10 +91,10 @@ export default function ContactForm() {
 
             <div className="relative z-10">
               <SlideIn direction="left">
-                <h2 className="text-5xl font-black mb-8 uppercase tracking-tighter leading-[0.9]">
+                <h2 className="text-3xl sm:text-4xl font-black mb-8 uppercase tracking-tighter leading-[0.9]">
                   Get in <br />
                   <span className="text-[#861211] drop-shadow-[3px_3px_3px_rgba(255,255,255,0.5)]">
-                    <TypewriterText text="Touch" loop cursorColor="#861211" />
+                    <TypewriterText text="Touch" className="text-3xl sm:text-4xl" loop cursorColor="#861211" />
                   </span>
                 </h2>
                 <p className="text-[#E2E2E0]/80 mb-12 text-lg leading-relaxed max-w-md font-medium">

@@ -72,7 +72,7 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col items-center text-center mb-20">
               <div className="max-w-2xl">
-                <h3 className="text-4xl md:text-5xl font-black text-[#0E2931] mb-4 uppercase tracking-tighter">
+                <h3 className="text-3xl sm:text-3xl font-black text-[#0E2931] mb-4 uppercase tracking-tighter">
                    Engineered for <TypewriterText className="text-[#861211]" text="Excellence" />
                 </h3>
                 <p className="text-[#0E2931]/60 text-lg font-medium italic">

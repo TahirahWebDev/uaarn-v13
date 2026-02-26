@@ -118,7 +118,7 @@ export default function AboutPage() {
         </div>
 
         <div className="text-center mb-16 md:mb-10">
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4 text-[#0E2931]">
+          <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tighter mb-4 text-[#0E2931]">
             Our{" "}
             <span className="text-[#861211] inline-block">
               <TypewriterText text="Mission" loop cursorColor="#861211" />
@@ -325,7 +325,7 @@ export default function AboutPage() {
             <Globe size={10} className="text-[#2B7574] animate-spin-slow" />
             Brain Trust
           </div>
-          <h2 className="text-5xl font-black text-[#0E2931] mb-12 uppercase tracking-tighter leading-none">
+          <h2 className="text-3xl sm:text-4xl font-black text-[#0E2931] mb-12 uppercase tracking-tighter leading-none">
             Meet Our <span className="text-[#861211] inline-block italic">
               <TypewriterText text="Core Team" loop cursorColor="#861211" />
             </span>

@@ -29,7 +29,7 @@ const DarkCommunitySection: React.FC = () => {
             </motion.span>{" "}
             Collective Intelligence
           </motion.div>
-          <h1 className="text-4xl sm:text-5xl font-black text-[#0E2931] mb-6 uppercase tracking-tighter leading-none">
+          <h1 className="text-3xl sm:text-3xl font-black text-[#0E2931] mb-6 uppercase tracking-tighter leading-none">
             Join the{" "}
             <span className="text-[#861211] italic inline-block">
               <TypewriterText text="Community" loop cursorColor="#861211" />

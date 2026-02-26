@@ -51,7 +51,7 @@ export default function TestimonialsSection() {
             <div className="w-1.5 h-1.5 rounded-full bg-[#861211]" />
             Global Validation
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-[#0E2931] tracking-tighter uppercase leading-none">
+          <h2 className="text-3xl sm:text-3xl font-black text-[#0E2931] tracking-tighter uppercase leading-none">
             Trusted by{" "}
             <span className="text-[#861211] italic inline-block">
               <TypewriterText text="Industry Leaders" loop cursorColor="#861211" />
