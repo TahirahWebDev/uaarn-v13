@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Target, Lightbulb, Shield, Sparkles, Zap, Globe } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence, PanInfo } from "framer-motion";
@@ -58,6 +58,16 @@ const team = [
 export default function AboutPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // Responsive check for slider logic
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -125,19 +135,27 @@ export default function AboutPage() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, x: 50, scale: 0.95 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: -50, scale: 0.95 }}
-                transition={{ duration: 0.4, ease: "circOut" }}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                // FIXED: Smoother physical spring transition for mobile swipe
+                transition={{
+                  type: "spring",
+                  stiffness: 180,
+                  damping: 22,
+                  mass: 0.8
+                }}
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.1}
                 onDragEnd={(event, info: PanInfo) => {
-                  if (info.offset.x < -100) setActiveIndex((prev) => (prev + 1) % missionCards.length);
-                  if (info.offset.x > 100) setActiveIndex((prev) => (prev - 1 + missionCards.length) % missionCards.length);
+                  const swipeThreshold = 50;
+                  if (info.offset.x < -swipeThreshold) setActiveIndex((prev) => (prev + 1) % missionCards.length);
+                  if (info.offset.x > swipeThreshold) setActiveIndex((prev) => (prev - 1 + missionCards.length) % missionCards.length);
                 }}
                 className={`
                       w-full h-[320px] p-10 rounded-[3.5rem] flex flex-col justify-between 
-                      relative border border-white/40 backdrop-blur-2xl mt-4
+                      relative border border-white/40 backdrop-blur-2xl mt-4 touch-pan-y
                       ${missionCards[activeIndex].color} ${missionCards[activeIndex].textColor} ${missionCards[activeIndex].shadow}
                    `}
               >
@@ -172,9 +190,9 @@ export default function AboutPage() {
             </motion.div>
           </div>
 
-          {/* DESKTOP GRID - Only visible on md+ */}
+          {/* DESKTOP GRID */}
           <div className="hidden md:contents">
-            {/* Card 1: Precision */}
+            {/* Precision */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -186,16 +204,12 @@ export default function AboutPage() {
                 <Target size={24} className="group-hover:rotate-12 transition-transform" />
               </div>
               <div className="mt-8">
-                <h3 className="text-2xl font-black uppercase tracking-tighter mb-1 group-hover:text-[#861211] transition-colors">
-                  {missionCards[0].title}
-                </h3>
-                <p className="text-[#0E2931]/60 text-sm font-medium italic max-w-md">
-                  {missionCards[0].desc}
-                </p>
+                <h3 className="text-2xl font-black uppercase tracking-tighter mb-1 group-hover:text-[#861211] transition-colors">{missionCards[0].title}</h3>
+                <p className="text-[#0E2931]/60 text-sm font-medium italic max-w-md">{missionCards[0].desc}</p>
               </div>
             </motion.div>
 
-            {/* Card 2: Innovation */}
+            {/* Innovation */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -207,16 +221,12 @@ export default function AboutPage() {
                 <Lightbulb size={22} className="text-white group-hover:animate-pulse" />
               </div>
               <div>
-                <h3 className="text-xl font-black uppercase tracking-tighter mb-1">
-                  {missionCards[1].title}
-                </h3>
-                <p className="text-white/70 text-xs font-medium italic leading-relaxed">
-                  {missionCards[1].desc}
-                </p>
+                <h3 className="text-xl font-black uppercase tracking-tighter mb-1">{missionCards[1].title}</h3>
+                <p className="text-white/70 text-xs font-medium italic leading-relaxed">{missionCards[1].desc}</p>
               </div>
             </motion.div>
 
-            {/* Card 3: Resilience */}
+            {/* Resilience */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -228,16 +238,12 @@ export default function AboutPage() {
                 <Shield size={22} className="group-hover:animate-bounce" />
               </div>
               <div>
-                <h3 className="text-xl font-black uppercase tracking-tighter mb-1">
-                  {missionCards[2].title}
-                </h3>
-                <p className="text-[#0E2931]/50 text-xs font-medium italic leading-relaxed">
-                  {missionCards[2].desc}
-                </p>
+                <h3 className="text-xl font-black uppercase tracking-tighter mb-1">{missionCards[2].title}</h3>
+                <p className="text-[#0E2931]/50 text-xs font-medium italic leading-relaxed">{missionCards[2].desc}</p>
               </div>
             </motion.div>
 
-            {/* Card 4: Agentic Intelligence */}
+            {/* Intelligence */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -248,12 +254,8 @@ export default function AboutPage() {
                 <div className="w-10 h-10 rounded-lg bg-[#861211]/20 flex items-center justify-center text-white mb-4">
                   <Zap size={22} className="group-hover:scale-110 transition-transform" />
                 </div>
-                <h3 className="text-2xl font-black uppercase tracking-tighter mb-1">
-                  {missionCards[3].title}
-                </h3>
-                <p className="text-[#E2E2E0]/50 text-sm font-medium max-w-xs italic leading-relaxed">
-                  {missionCards[3].desc}
-                </p>
+                <h3 className="text-2xl font-black uppercase tracking-tighter mb-1">{missionCards[3].title}</h3>
+                <p className="text-[#E2E2E0]/50 text-sm font-medium max-w-xs italic leading-relaxed">{missionCards[3].desc}</p>
               </div>
               <Zap size={140} className="absolute right-[-20px] bottom-[-30px] text-white/5 rotate-12 pointer-events-none" />
             </motion.div>
@@ -312,7 +314,6 @@ export default function AboutPage() {
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
             </motion.div>
-            <div className="absolute -inset-4 rounded-[3.5rem] -z-0 group-hover:scale-105 transition-transform duration-500" />
           </motion.div>
         </div>
       </section>
