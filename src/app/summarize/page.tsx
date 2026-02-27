@@ -119,7 +119,7 @@ function SummarizeContent() {
   ] as const;
 
   return (
-    <div className="min-h-screen bg-[#E2E2E0] py-16 px-6 selection:bg-[#861211]/20 relative overflow-hidden">
+    <div className="min-h-screen bg-[#E2E2E0] mt-16 py-12 px-6 selection:bg-[#861211]/20 relative overflow-hidden">
       {/* Animated bg blob */}
       <motion.div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gradient-to-b from-[#2B7574]/10 to-transparent blur-[120px] rounded-full pointer-events-none"
@@ -136,7 +136,7 @@ function SummarizeContent() {
         {/* Header */}
         <div className="text-center mb-12">
           <SlideIn direction="down">
-            <h1 className="text-4xl md:text-5xl font-black text-[#0E2931] mb-6 uppercase tracking-tighter leading-none">
+            <h1 className="text-3xl md:text-3xl font-black text-[#0E2931] mb-6 uppercase tracking-tighter leading-none">
               Summarize <span className="text-[#861211]"><TypewriterText text="Intelligence" loop cursorColor="#861211" /></span>
             </h1>
           </SlideIn>

@@ -45,7 +45,7 @@ export default function AskPage() {
     };
 
     return (
-        <div className="bg-[#E2E2E0] min-h-screen selection:bg-[#861211]/20">
+        <div className="bg-[#E2E2E0] min-h-screen mt-20 selection:bg-[#861211]/20">
             {/* Animated background blob */}
             <motion.div
                 className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-[#2B7574]/10 to-transparent blur-[100px] rounded-full pointer-events-none -z-10"

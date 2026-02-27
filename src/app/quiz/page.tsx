@@ -45,7 +45,7 @@ export default function QuizPage() {
     };
 
     return (
-        <div className="bg-[#E2E2E0] min-h-screen selection:bg-[#861211]/20 font-sans">
+        <div className="bg-[#E2E2E0] mt-20 min-h-screen selection:bg-[#861211]/20 font-sans">
             {/* Animated bg */}
             <motion.div
                 className="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gradient-to-b from-[#0E2931]/8 to-transparent blur-[100px] rounded-full pointer-events-none -z-10"

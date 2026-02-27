@@ -79,7 +79,7 @@ export default function CourseDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#E2E2E0] py-12 px-6 selection:bg-[#861211]/20">
+    <div className="min-h-screen bg-[#E2E2E0] mt-16 py-12 px-6 selection:bg-[#861211]/20">
       <div className="max-w-4xl mx-auto"> {/* Decreased from max-w-5xl for a sleeker profile */}
         
         {/* Navigation / Back Button */}

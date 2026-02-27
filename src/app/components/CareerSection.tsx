@@ -31,7 +31,7 @@ export default function CareerSection() {
             <div className="max-w-6xl mx-auto text-center">
 
                 <SlideIn direction="up">
-                    <h2 className="text-3xl sm:text-4xl font-black text-[#0E2931] tracking-tighter uppercase leading-tight max-w-3xl mx-auto">
+                    <h2 className="text-3xl sm:text-3xl font-black text-[#0E2931] tracking-tighter uppercase leading-tight max-w-3xl mx-auto">
                         Your <span className="text-[#861211]"><TypewriterText text="AI-Powered" loop cursorColor="#861211" /></span> Career Mentor
                     </h2>
 

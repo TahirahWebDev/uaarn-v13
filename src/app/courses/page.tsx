@@ -89,11 +89,11 @@ export default function CoursesPage() {
           <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}>
             <BookOpen size={12} className="text-[#861211]" />
           </motion.div>
-          Knowledge Base • UAARN v9
+          Knowledge Base • UAARN
         </motion.div>
 
         <SlideIn direction="up" className="max-w-2xl">
-          <h2 className="text-4xl md:text-6xl font-black text-[#0E2931] uppercase tracking-tighter mb-4">
+          <h2 className="text-3xl md:text-3xl font-black text-[#0E2931] uppercase tracking-tighter mb-4">
             Explore{" "}
             <span className="text-[#861211] inline-block">
               <TypewriterText text="Top Courses" loop cursorColor="#861211" />

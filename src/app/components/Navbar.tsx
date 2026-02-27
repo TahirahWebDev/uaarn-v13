@@ -45,6 +45,7 @@ export default function Navbar({ onOpenPlans }: { onOpenPlans?: () => void }) {
 
         {/* DESKTOP NAVIGATION - Centered & Minimal */}
         <div className="hidden lg:flex items-center bg-[#0E2931]/5 px-6 py-2 rounded-full border border-[#0E2931]/5 space-x-8 text-[#0E2931] text-[12px] font-bold uppercase tracking-widest">
+          <Link href="/" className=" text-[#2B7574] hover:text-[#861211] transition-colors">Home</Link>
           <Link href="/about" className=" text-[#2B7574] hover:text-[#861211] transition-colors">About</Link>
           <Link href="/courses" className=" text-[#2B7574] hover:text-[#861211] transition-colors">Courses</Link>
           <Link href="/ask" className="flex items-center gap-1.5 text-[#2B7574] hover:text-[#861211]">
@@ -93,6 +94,10 @@ export default function Navbar({ onOpenPlans }: { onOpenPlans?: () => void }) {
         {/* MOBILE NAVIGATION - Drawer Style */}
         {open && (
           <div className="absolute top-[calc(100%+12px)] left-0 right-0 mx-auto w-full max-w-[95%] bg-[#E2E2E0] border border-[#0E2931]/10 rounded-3xl shadow-2xl p-8 flex flex-col space-y-6 text-[#0E2931] lg:hidden animate-in fade-in slide-in-from-top-4 duration-300">
+            
+            <Link href="/" className="flex items-center gap-4 text-lg font-bold" onClick={() => setOpen(false)}>
+              <Info className="text-[#861211]" /> Home
+            </Link>
             <Link href="/about" className="flex items-center gap-4 text-lg font-bold" onClick={() => setOpen(false)}>
               <Info className="text-[#861211]" /> About
             </Link>
